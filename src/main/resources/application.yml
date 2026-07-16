@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: Digital Village Service Hub
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+  mvc:
+    problemdetails:
+      enabled: true
+  thymeleaf:
+    cache: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+logging:
+  level:
+    root: INFO
+    com.digitalvillage: INFO
