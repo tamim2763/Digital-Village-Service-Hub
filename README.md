@@ -1,153 +1,80 @@
 # Digital Village Service Hub
 
-Digital Village Service Hub is a Spring Boot 3.x starter for a multilingual rural services platform. This repository only contains the foundation: package structure, starter configuration, sample user slice, and a Thymeleaf + Bootstrap UI shell. Business features will be added later by feature teams.
+Digital Village Service Hub is an **HCI-compliant, Bengali-first** Spring Boot web application designed to provide essential public services to rural communities in Bangladesh. This project was built with a strong focus on Human-Computer Interaction (HCI) principles, ensuring that the platform is accessible, readable, and easy to navigate for its target demographic.
+
+## Key Features
+
+- **HCI-Optimized Clean UI**: A minimalistic, distraction-free "Light Theme" (inspired by OpenRouter) to reduce cognitive load.
+- **Multilingual Support (i18n)**: Seamlessly toggle between Bengali (Default) and English.
+- **Context-Aware Typography**: 
+  - **Kalpurush**: Locally hosted, high-legibility Bengali font set as the default for all regional text.
+  - **Inter**: Clean, modern sans-serif font specifically configured for English/Latin characters.
+  - Typography scales automatically for perfect readability in both languages.
+- **Responsive Layout**: Built with Bootstrap 5 to ensure full compatibility across mobile devices and desktop screens.
 
 ## Tech Stack
 
-- Java 21
-- Spring Boot 3.5.9
-- Maven Wrapper
-- Spring MVC
-- Spring Data JPA
-- Spring Security
-- Thymeleaf
-- Bootstrap 5
-- MySQL
-- Lombok
-- Validation
-- DevTools
-- Actuator
-
-## Why these dependencies are included
-
-- `spring-boot-starter-web`: servlet-based web application support with Spring MVC.
-- `spring-boot-starter-data-jpa`: repository and entity support for MySQL-backed persistence.
-- `spring-boot-starter-security`: security foundation for future authentication and authorization.
-- `spring-boot-starter-thymeleaf`: server-side rendering for the starter UI pages.
-- `spring-boot-starter-validation`: Jakarta Bean Validation for DTOs and future forms.
-- `spring-boot-starter-actuator`: production health and operational endpoints.
-- `spring-boot-devtools`: faster local development restart cycle.
-- `mysql-connector-j`: MySQL JDBC driver.
-- `lombok`: reduces boilerplate in entities and service classes.
-- `spring-boot-configuration-processor`: metadata support for future custom configuration properties.
-- `spring-boot-starter-test`: standard testing support for the starter build.
-- `spring-security-test`: security-aware testing support for future secured endpoints.
+- **Backend**: Java 21, Spring Boot 3.5.9, Spring MVC, Spring Data JPA, Spring Security
+- **Frontend**: Thymeleaf, Bootstrap 5, Vanilla CSS
+- **Database**: MySQL 8.x
+- **Build Tool**: Maven Wrapper
 
 ## Project Structure
 
-- `com.digitalvillage.config`: shared configuration entry points.
-- `com.digitalvillage.controller`: MVC pages and sample REST controller.
-- `com.digitalvillage.service` and `service.impl`: service contract and implementation.
-- `com.digitalvillage.repository`: Spring Data repositories.
-- `com.digitalvillage.entity`: JPA entities.
-- `com.digitalvillage.dto`: request/response transfer objects.
-- `com.digitalvillage.mapper`: simple mapping layer for the sample slice.
-- `com.digitalvillage.security`: Spring Security foundation.
-- `com.digitalvillage.exception`: application exception types.
-- `com.digitalvillage.util`: shared constants.
-- `com.digitalvillage.model`: UI view models.
+- `com.digitalvillage.config`: Shared configuration (e.g., i18n LocaleResolvers).
+- `com.digitalvillage.controller`: MVC page routing and model injection.
+- `com.digitalvillage.model`: UI view models (e.g., `ServiceCard`).
+- `src/main/resources/messages.properties`: Primary Bengali translations.
+- `src/main/resources/messages_en.properties`: English translations.
+- `src/main/resources/static/css/main.css`: Core design system and typography rules.
 
-## Configuration Profiles
+## Local Development Setup
 
-- `application.yml`: common settings.
-- `application-dev.yml`: local MySQL defaults using environment-variable placeholders.
-- `application-prod.yml`: production-oriented MySQL placeholders.
+### 1. MySQL Setup
 
-### MySQL placeholders
-
-Both runtime profiles read the same MySQL variables:
-
-- `MYSQL_JDBC_URL`
-- `MYSQL_HOST`
-- `MYSQL_PORT`
-- `MYSQL_DATABASE`
-- `MYSQL_USER`
-- `MYSQL_PASSWORD`
-
-If the variables are not set, the app falls back to:
-
-- URL: `jdbc:mysql://localhost:3306/digital_village_service_hub?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC`
-- User: `root`
-- Password: `CE23017@lisan`
-
-## Local Run
-
-1. Set Java 21.
-2. Install and start MySQL locally.
-3. Create a database named `digital_village_service_hub`.
-4. Make sure the `root` account can log in with password `CE23017@lisan`.
-5. Run the app with the `dev` profile.
-
-```bash
-./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
-```
-
-If you prefer the production settings, run with the `prod` profile instead.
-
-```bash
-./mvnw spring-boot:run -Dspring-boot.run.profiles=prod
-```
-
-## MySQL Setup
-
-Use any MySQL client you like, such as MySQL Workbench or the MySQL command line.
-
-Create the database and user before starting the app:
+The application requires a MySQL database. Create the database and user before starting the app:
 
 ```sql
 CREATE DATABASE digital_village_service_hub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
--- If needed, update your root password in MySQL Workbench or the MySQL shell.
--- The app will connect with:
--- user: root
--- password: CE23017@lisan
 ```
 
-If you want different credentials, set these environment variables before running the app:
+The application is configured to look for the following credentials by default:
+- **User**: `root`
+- **Password**: `YOUR_PASSWORD`
+
+If you are using different credentials, you must set them as environment variables before running the application:
 
 ```powershell
+# Windows PowerShell Example
 $env:MYSQL_HOST = 'localhost'
 $env:MYSQL_PORT = '3306'
 $env:MYSQL_DATABASE = 'digital_village_service_hub'
 $env:MYSQL_USER = 'root'
-$env:MYSQL_PASSWORD = 'CE23017@lisan'
+$env:MYSQL_PASSWORD = 'YOUR_PASSWORD'
 ```
 
-Then start the app with:
+### 2. Running the Application
 
-```powershell
-.\mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev
-```
-
-The `dev` profile uses port `8081`, so you can leave port `8080` for other tools if needed.
-
-## Recommended Developer Setup
-
-1. Install Java 21.
-2. Install MySQL 8.x.
-3. Create the database shown above.
-4. Run the Spring Boot app with the `dev` profile.
-
-MySQL is the intended development and production datastore for this starter.
-
-## Development Notes
-
-- Use constructor injection for new services and controllers.
-- Keep business logic in `service` and `service.impl`.
-- Keep MVC pages in `controller` and `templates`.
-- Keep persistence types in `entity`, `repository`, and `mapper`.
-- Add new feature modules without changing the sample user slice unless a shared contract changes.
-- Add new static assets under `src/main/resources/static`.
-- Add uploaded file handling later under `src/main/resources/uploads` or a dedicated storage service.
-- Authentication is intentionally permissive for now; replace the security starter config when real login is added.
-
-## Build
+Ensure you have Java 21 installed. Use the Maven wrapper to run the application with the `dev` profile. The `dev` profile disables Thymeleaf caching for easier UI development and runs the server on port `8081`.
 
 ```bash
-./mvnw clean test
+# Windows
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
+
+# Mac/Linux
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-## Starter Notes
+Once running, access the application at: **http://localhost:8081**
 
-- Authentication is intentionally not implemented yet.
-- Business workflows, API endpoints, and persistence operations beyond the sample user slice will be added later.
-- Uploaded files should go under `src/main/resources/uploads/` once that module exists.
+## Security & Version Control Notes
+
+- **Environment Variables**: Never hardcode real database passwords or secrets in `application-dev.yml` or `application-prod.yml`. Always use environment variables (`${MYSQL_PASSWORD:YOUR_PASSWORD}`).
+- **Local Overrides**: If you prefer using a file for your local secrets, create an `application-local.yml` file and run the app with the `local` profile. (Note: `*-local.yml` files are ignored by git).
+
+## Build for Production
+
+```bash
+# Run tests and package into an executable JAR
+.\mvnw.cmd clean package
+```

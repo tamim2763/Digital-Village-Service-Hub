@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: Digital Village Service Hub
   jpa:
@@ -11,6 +13,10 @@ spring:
   mvc:
     problemdetails:
       enabled: true
+  messages:
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
   thymeleaf:
     cache: true
 management:

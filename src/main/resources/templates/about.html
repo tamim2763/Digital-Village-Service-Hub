@@ -1,49 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head :: head(${pageTitle})}"></head>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head th:replace="~{fragments/head :: head('about.title')}"></head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar('about')}"></div>
 
 <main class="page-section">
     <div class="container">
-        <div class="row align-items-center g-4">
-            <div class="col-lg-6">
-                <span class="section-kicker">About the foundation</span>
-                <h1 class="mt-3">Built as a shared base for multiple teams.</h1>
-                <p class="section-copy mt-3">
-                    This project is intentionally limited to starter architecture. It gives the platform team a
-                    stable Spring Boot foundation while leaving all business workflows for later feature squads.
+        <div class="row align-items-start g-5">
+            <div class="col-lg-7">
+                <span class="section-kicker" th:text="#{about.kicker}">About the platform</span>
+                <h1 class="mt-3" style="font-size: clamp(1.75rem, 3.5vw, 2.25rem); letter-spacing: -0.02em;" th:text="#{about.heading}">A digital platform dedicated to serving rural communities.</h1>
+                <p class="section-copy mt-3" th:text="#{about.description}">
+                    This platform is built for rural citizens...
                 </p>
                 <ul class="timeline-list mt-4">
                     <li>
                         <span class="timeline-marker"></span>
                         <div>
-                            <strong>Clean package structure</strong>
-                            <div>Separated by configuration, web, service, data, security, and utility concerns.</div>
+                            <strong th:text="#{about.feature1.title}">Simple & Clean Interface</strong>
+                            <div th:text="#{about.feature1.desc}">Designed for ease of use.</div>
                         </div>
                     </li>
                     <li>
                         <span class="timeline-marker"></span>
                         <div>
-                            <strong>Future-ready modules</strong>
-                            <div>The user slice is only a sample, so additional modules can be added without refactoring the core.</div>
+                            <strong th:text="#{about.feature2.title}">Multilingual Support</strong>
+                            <div th:text="#{about.feature2.desc}">Bengali and English.</div>
                         </div>
                     </li>
                     <li>
                         <span class="timeline-marker"></span>
                         <div>
-                            <strong>Multilingual UI direction</strong>
-                            <div>The Thymeleaf and Bootstrap foundation supports localized content and responsive layouts.</div>
+                            <strong th:text="#{about.feature3.title}">Future-Ready</strong>
+                            <div th:text="#{about.feature3.desc}">New services without refactoring.</div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-6">
-                <div class="surface-card p-4 p-md-5">
+            <div class="col-lg-5">
+                <div class="surface-card p-4">
                     <div class="info-card border-0 shadow-none p-0 bg-transparent">
                         <div class="info-icon"><i class="fa-solid fa-layer-group"></i></div>
-                        <h3>Starter principles</h3>
-                        <p class="mb-0">Follow constructor injection, keep controllers thin, place business rules in services, and move integration details to dedicated packages as the project grows.</p>
+                        <h3 th:text="#{about.principles.title}">Our Principles</h3>
+                        <p class="mb-0" th:text="#{about.principles.desc}">User needs come first.</p>
                     </div>
                 </div>
             </div>
