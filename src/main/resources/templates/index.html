@@ -1,41 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head :: head(${pageTitle})}"></head>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head th:replace="~{fragments/head :: head('home.title')}"></head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar('home')}"></div>
 
 <main>
     <section class="hero-section">
-        <div class="container position-relative">
+        <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-7">
-                    <span class="section-kicker">Digital access for every village</span>
-                    <h1 class="hero-title mt-3">One hub for essential public services.</h1>
-                    <p class="hero-copy mt-4 mb-0">
-                        Digital Village Service Hub is a clean, multilingual Spring Boot foundation for train tickets,
-                        government forms, weather alerts, crop prices, and telemedicine. The real workflows will be
-                        added later by specialized teams.
+                    <span class="section-kicker" th:text="#{home.kicker}">Digital access for every village</span>
+                    <h1 class="hero-title mt-3" th:text="#{home.hero.title}">Essential public services in one place.</h1>
+                    <p class="hero-copy mt-3 mb-0" th:text="#{home.hero.description}">
+                        Digital Village Service Hub is a multilingual platform...
                     </p>
                     <div class="d-flex flex-wrap gap-3 mt-4">
-                        <a class="btn btn-warning btn-lg px-4" th:href="@{/services}">Explore services</a>
-                        <a class="btn btn-outline-dark btn-lg px-4" th:href="@{/about}">About this platform</a>
+                        <a class="btn-primary-dv" th:href="@{/services}" th:text="#{home.hero.btn.services}">Explore Services</a>
+                        <a class="btn-secondary-dv" th:href="@{/about}" th:text="#{home.hero.btn.about}">About This Platform</a>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="hero-panel">
-                        <span class="mini-stat">Starter platform</span>
+                        <span class="mini-stat" th:text="#{home.hero.panel.label}">Platform Info</span>
                         <div class="hero-panel-grid">
                             <div class="hero-badge">
-                                <strong>Java 21 + Spring Boot 3.x</strong>
-                                <span>Modern baseline for a maintainable service hub.</span>
+                                <strong th:text="#{home.hero.panel.tech.title}">Java 21 + Spring Boot 3.x</strong>
+                                <span th:text="#{home.hero.panel.tech.desc}">Modern baseline.</span>
                             </div>
                             <div class="hero-badge">
-                                <strong>Thymeleaf + Bootstrap 5</strong>
-                                <span>Responsive pages ready for localization and future features.</span>
+                                <strong th:text="#{home.hero.panel.ui.title}">Thymeleaf + Bootstrap 5</strong>
+                                <span th:text="#{home.hero.panel.ui.desc}">Responsive pages.</span>
                             </div>
                             <div class="hero-badge">
-                                <strong>MySQL + Spring Data JPA</strong>
-                                <span>Prepared for structured data once business modules are added.</span>
+                                <strong th:text="#{home.hero.panel.db.title}">MySQL + Spring Data JPA</strong>
+                                <span th:text="#{home.hero.panel.db.desc}">Data stored securely.</span>
                             </div>
                         </div>
                     </div>
@@ -44,12 +42,12 @@
         </div>
     </section>
 
-    <section class="page-section pt-0">
+    <section class="page-section">
         <div class="container">
             <div class="section-heading">
-                <span class="section-kicker">Public services in progress</span>
-                <h2 class="mt-3">The platform layout is ready for future service teams.</h2>
-                <p class="section-copy mb-0">Each card below is intentionally non-functional. It only demonstrates the target information architecture and visual language.</p>
+                <span class="section-kicker" th:text="#{home.services.kicker}">Public services</span>
+                <h2 class="mt-2" th:text="#{home.services.title}">Services available on this platform</h2>
+                <p class="section-copy mb-0" th:text="#{home.services.description}">Each service is designed for rural communities.</p>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-xl-4" th:each="card : ${serviceCards}">
@@ -57,9 +55,9 @@
                         <div class="service-icon">
                             <i th:class="${card.iconClass}"></i>
                         </div>
-                        <h3 th:text="${card.title}">Service title</h3>
-                        <p th:text="${card.description}">Service description</p>
-                        <span class="coming-soon-pill">Coming Soon</span>
+                        <h3 th:text="#{__${card.titleKey}__}">Service title</h3>
+                        <p th:text="#{__${card.descriptionKey}__}">Service description</p>
+                        <span class="coming-soon-pill" th:text="#{label.coming_soon}">Coming Soon</span>
                     </article>
                 </div>
             </div>

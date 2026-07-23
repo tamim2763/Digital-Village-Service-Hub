@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<nav class="navbar navbar-expand-lg navbar-dark dv-navbar sticky-top" th:fragment="navbar(activePage)">
-    <div class="container py-2">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<nav class="navbar navbar-expand-lg dv-navbar sticky-top" th:fragment="navbar(activePage)">
+    <div class="container py-1">
         <a class="navbar-brand d-flex align-items-center gap-2" th:href="@{/}">
             <span class="brand-mark">DV</span>
-            <span>Digital Village Service Hub</span>
+            <span th:text="#{app.name}">Digital Village Service Hub</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-1 align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'home'} ? ' active'" th:href="@{/}">Home</a>
+                    <a class="nav-link" th:classappend="${activePage == 'home'} ? ' active'" th:href="@{/}" th:text="#{nav.home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'about'} ? ' active'" th:href="@{/about}">About</a>
+                    <a class="nav-link" th:classappend="${activePage == 'about'} ? ' active'" th:href="@{/about}" th:text="#{nav.about}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'services'} ? ' active'" th:href="@{/services}">Services</a>
+                    <a class="nav-link" th:classappend="${activePage == 'services'} ? ' active'" th:href="@{/services}" th:text="#{nav.services}">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'contact'} ? ' active'" th:href="@{/contact}">Contact</a>
+                    <a class="nav-link" th:classappend="${activePage == 'contact'} ? ' active'" th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
+                </li>
+                <li class="nav-item ms-lg-2">
+                    <!-- Language toggle: if current locale is Bengali, show link to English and vice versa -->
+                    <a th:if="${#locale.language == 'bn'}" class="lang-toggle" th:href="@{''(lang='en')}">
+                        <i class="fa-solid fa-globe"></i>
+                        <span th:text="#{nav.language}">EN</span>
+                    </a>
+                    <a th:if="${#locale.language != 'bn'}" class="lang-toggle" th:href="@{''(lang='bn')}">
+                        <i class="fa-solid fa-globe"></i>
+                        <span th:text="#{nav.language}">বাং</span>
+                    </a>
                 </li>
             </ul>
         </div>

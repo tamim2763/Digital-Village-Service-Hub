@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <footer class="footer mt-auto" th:fragment="footer">
-    <div class="container py-4 py-md-5">
+    <div class="container py-4">
         <div class="row g-4 align-items-center">
             <div class="col-md-7">
-                <strong>Digital Village Service Hub</strong>
-                <p class="mb-0 mt-2">A starter foundation for multilingual rural service access, built for future modules and multi-team development.</p>
+                <strong th:text="#{footer.brand}">Digital Village Service Hub</strong>
+                <p class="mb-0 mt-1" style="font-size: 0.9rem;" th:text="#{footer.description}">A multilingual digital service platform for rural communities.</p>
             </div>
             <div class="col-md-5 text-md-end">
-                <small>Starter project only. Business functionality will be added later.</small>
+                <small th:text="#{footer.note}">This platform is under development.</small>
             </div>
         </div>
     </div>
