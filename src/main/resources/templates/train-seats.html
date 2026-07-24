@@ -146,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     coachSelect.addEventListener('change', (e) => {
         const coach = e.target.value;
-        selectedSeats = []; // Clear selection when changing coach
         
         allSeatButtons.forEach(btn => {
             const currentSeatId = btn.getAttribute('data-seat');
@@ -155,7 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             btn.setAttribute('data-seat', newSeatId);
             btn.innerText = newSeatId;
-            btn.classList.remove('selected');
+            
+            if (selectedSeats.includes(newSeatId)) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
         });
         
         updateUI();
