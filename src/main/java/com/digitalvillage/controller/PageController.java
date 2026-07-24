@@ -54,6 +54,7 @@ public class PageController {
 						.iconClass("fa-solid fa-cloud-sun-rain")
 						.titleKey("service.weather.title")
 						.descriptionKey("service.weather.description")
+						.link("/services/weather")
 						.build(),
 				ServiceCard.builder()
 						.iconClass("fa-solid fa-wheat-awn-circle-exclamation")

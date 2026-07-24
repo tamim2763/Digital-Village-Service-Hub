@@ -14,6 +14,10 @@ Digital Village Service Hub is an **HCI-compliant, Bengali-first** Spring Boot w
   - **Search Functionality**: Search for trains by departure and arrival stations, and date.
   - **Seat Selection**: Interactive 2x2 seat selection map with dynamic coach switching and real-time total fare calculations.
   - **Mock Backend Integration**: Filter active trains based on local time and dynamically generate class availabilities.
+- **Weather & Agricultural Dashboard**:
+  - **Hyper-Local Forecasts**: Real-time geolocation and dropdown-based location selection using the Open-Meteo API.
+  - **Comprehensive Weather Data**: Current conditions, hourly rain probability, and a 7-day forecast.
+  - **Intelligent Farmer Advisories**: Dynamic agricultural recommendations (Irrigation, Pesticide Spraying, Harvesting) calculated on-the-fly based on precipitation probability, rain volume, and wind speed.
 - **Responsive Layout**: Built with Bootstrap 5 to ensure full compatibility across mobile devices and desktop screens.
 
 ## Tech Stack
