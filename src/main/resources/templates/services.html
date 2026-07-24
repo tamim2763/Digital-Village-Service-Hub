@@ -19,7 +19,8 @@
                     </div>
                     <h3 th:text="#{__${card.titleKey}__}">Service title</h3>
                     <p th:text="#{__${card.descriptionKey}__}">Service description</p>
-                    <span class="coming-soon-pill" th:text="#{label.coming_soon}">Coming Soon</span>
+                    <span class="coming-soon-pill" th:if="${card.link == null}" th:text="#{label.coming_soon}">Coming Soon</span>
+                    <a th:if="${card.link != null}" th:href="@{${card.link}}" class="btn-primary-dv mt-3 d-inline-block" style="font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 4px;" th:text="#{home.hero.btn.services}">Explore Services</a>
                 </article>
             </div>
         </div>

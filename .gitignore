@@ -40,3 +40,7 @@ Task 4-Human Machine Interaction Experiment.md
 *.env
 application-local.yml
 application-secret.yml
+
+### OS Files ###
+.DS_Store
+Thumbs.db

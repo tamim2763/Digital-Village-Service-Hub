@@ -11,8 +11,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
   thymeleaf:
-    cache: true
+    cache: false
+    prefix: file:src/main/resources/templates/
 server:
   port: 8081
 logging:

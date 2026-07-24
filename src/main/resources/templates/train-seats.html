@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head th:replace="~{fragments/head :: head('train.title')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('services')}"></div>
+<main class="page-section bg-light" style="min-height: calc(100vh - 200px);">
+    <div class="container py-4">
+        
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4">
+            <div class="card-header bg-white border-bottom-0 pt-4 pb-0 px-4">
+                <h4 class="fw-bold mb-1" th:text="${passengerForm.trainName}">Train Name</h4>
+                <p class="text-muted mb-0">
+                    <span th:text="${passengerForm.fromStation}">Dhaka</span> <i class="fas fa-arrow-right mx-2"></i> <span th:text="${passengerForm.toStation}">Chattogram</span>
+                    <span class="mx-3">|</span> <span th:text="${passengerForm.date}">24-Jul-2026</span>
+                </p>
+                <hr>
+            </div>
+            
+            <div class="card-body px-4 pb-4">
+                <h5 class="fw-bold text-success mb-3" th:text="#{train.seats.choose}">Choose your seat(s)** Maximum 4 seats can be booked at a time.</h5>
+                
+                <div class="row g-5">
+                    <!-- Left Column: Seat Grid -->
+                    <div class="col-lg-6 border-end">
+                        <label class="form-label fw-bold" th:text="#{train.seats.coach}">Select Coach</label>
+                        <select class="form-select mb-4 fw-bold" id="coachSelect">
+                            <option value="KHA" selected>KHA - 4 Seat(s)</option>
+                            <option value="GA">GA - 1 Seat(s)</option>
+                        </select>
+
+                        <!-- Legend -->
+                        <div class="d-flex gap-3 mb-4 justify-content-center text-muted" style="font-size: 0.85rem;">
+                            <div class="d-flex align-items-center"><div style="width:16px;height:16px;border:1px solid #ccc;border-radius:4px;margin-right:6px;"></div> Available</div>
+                            <div class="d-flex align-items-center"><div style="width:16px;height:16px;background-color:#0d6efd;border-radius:4px;margin-right:6px;"></div> Selected</div>
+                            <div class="d-flex align-items-center"><div style="width:16px;height:16px;background-color:#fd7e14;border-radius:4px;margin-right:6px;"></div> Booked</div>
+                        </div>
+
+                        <!-- Grid -->
+                        <div class="seat-container bg-white border rounded p-4 text-center mx-auto" style="max-width: 320px;">
+                            <!-- Generate rows in JS or Thymeleaf. I'll use hardcoded layout for the mock KHA coach -->
+                            <div class="d-flex justify-content-between mb-3" th:each="i : ${#numbers.sequence(1, 10, 4)}">
+                                <div class="d-flex gap-2">
+                                    <button class="seat-btn available" th:data-seat="'KHA-'+${i}">KHA-[[${i}]]</button>
+                                    <button class="seat-btn available" th:data-seat="'KHA-'+${i+1}">KHA-[[${i+1}]]</button>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="seat-btn" th:classappend="${i == 5} ? 'booked' : 'available'" th:data-seat="'KHA-'+${i+2}" th:disabled="${i == 5}">KHA-[[${i+2}]]</button>
+                                    <button class="seat-btn available" th:data-seat="'KHA-'+${i+3}">KHA-[[${i+3}]]</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Right Column: Details & Checkout -->
+                    <div class="col-lg-6">
+                        <h5 class="fw-bold mb-3" th:text="#{train.seats.details}">Seat Details</h5>
+                        <table class="table table-borderless table-striped text-center align-middle" id="seatTable">
+                            <thead class="border-bottom">
+                                <tr>
+                                    <th th:text="#{train.search.class}">Class</th>
+                                    <th th:text="#{train.seats.seat}">Seats</th>
+                                    <th th:text="#{train.summary.total}">Fare</th>
+                                </tr>
+                            </thead>
+                            <tbody id="seatTableBody">
+                                <!-- JS populated -->
+                            </tbody>
+                            <tfoot class="border-top" style="background-color: #f8f9fa;">
+                                <tr>
+                                    <td colspan="2" class="text-end fw-bold text-success" th:text="#{train.seats.total}">Total: ৳</td>
+                                    <td class="fw-bold text-success" id="totalFare">0</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <form th:action="@{/services/train/passenger}" method="post" class="mt-4" id="checkoutForm">
+                            <input type="hidden" name="trainId" th:value="${passengerForm.trainId}" />
+                            <input type="hidden" name="trainName" th:value="${passengerForm.trainName}" />
+                            <input type="hidden" name="fromStation" th:value="${passengerForm.fromStation}" />
+                            <input type="hidden" name="toStation" th:value="${passengerForm.toStation}" />
+                            <input type="hidden" name="date" th:value="${passengerForm.date}" />
+                            <input type="hidden" name="seatClass" th:value="${passengerForm.seatClass}" />
+                            <input type="hidden" name="fare" th:value="${passengerForm.fare}" id="baseFare" />
+                            <input type="hidden" name="selectedSeats" id="selectedSeatsInput" />
+
+                            <label class="form-label fw-bold text-danger">Boarding Station *</label>
+                            <select class="form-select mb-4">
+                                <option selected th:text="${passengerForm.fromStation} + ' Station'">Kamalapur Station</option>
+                            </select>
+
+                            <button type="button" id="continueBtn" class="btn btn-success w-100 py-3 fw-bold rounded-pill text-uppercase disabled" th:text="#{train.seats.continue}">CONTINUE PURCHASE</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+<style>
+.seat-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    background-color: transparent;
+    font-size: 0.65rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #555;
+}
+.seat-btn:hover:not(.booked):not(:disabled) {
+    border-color: #0d6efd;
+    background-color: #f0f7ff;
+}
+.seat-btn.selected {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+.seat-btn.booked {
+    background-color: #fd7e14;
+    border-color: #fd7e14;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const maxSeats = 4;
+    const baseFare = parseInt(document.getElementById('baseFare').value);
+    const seatClass = document.querySelector('input[name="seatClass"]').value;
+    let selectedSeats = [];
+    
+    const coachSelect = document.getElementById('coachSelect');
+    const seatButtons = document.querySelectorAll('.seat-btn.available');
+    const allSeatButtons = document.querySelectorAll('.seat-btn');
+    const tableBody = document.getElementById('seatTableBody');
+
+    coachSelect.addEventListener('change', (e) => {
+        const coach = e.target.value;
+        selectedSeats = []; // Clear selection when changing coach
+        
+        allSeatButtons.forEach(btn => {
+            const currentSeatId = btn.getAttribute('data-seat');
+            const seatNum = currentSeatId.split('-')[1];
+            const newSeatId = coach + '-' + seatNum;
+            
+            btn.setAttribute('data-seat', newSeatId);
+            btn.innerText = newSeatId;
+            btn.classList.remove('selected');
+        });
+        
+        updateUI();
+    });
+    const totalFareEl = document.getElementById('totalFare');
+    const inputEl = document.getElementById('selectedSeatsInput');
+    const btn = document.getElementById('continueBtn');
+    const form = document.getElementById('checkoutForm');
+
+    function updateUI() {
+        // Update table
+        tableBody.innerHTML = '';
+        if(selectedSeats.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="3" class="text-muted py-4">No seats selected</td></tr>';
+        } else {
+            selectedSeats.forEach(s => {
+                tableBody.innerHTML += `<tr><td>${seatClass}</td><td class="fw-bold">${s}</td><td>৳${baseFare}</td></tr>`;
+            });
+        }
+        
+        // Update total
+        const total = selectedSeats.length * baseFare;
+        totalFareEl.innerText = total;
+        inputEl.value = selectedSeats.join(', ');
+        document.getElementById('baseFare').value = total;
+        
+        // Toggle button
+        if(selectedSeats.length > 0) {
+            btn.classList.remove('disabled');
+        } else {
+            btn.classList.add('disabled');
+        }
+    }
+
+    seatButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const seatId = e.target.getAttribute('data-seat');
+            
+            if(selectedSeats.includes(seatId)) {
+                // Deselect
+                selectedSeats = selectedSeats.filter(s => s !== seatId);
+                e.target.classList.remove('selected');
+            } else {
+                // Select
+                if(selectedSeats.length < maxSeats) {
+                    selectedSeats.push(seatId);
+                    e.target.classList.add('selected');
+                } else {
+                    alert('You can only select up to 4 seats.');
+                }
+            }
+            updateUI();
+        });
+    });
+
+    btn.addEventListener('click', () => {
+        if(!btn.classList.contains('disabled')) {
+            form.submit();
+        }
+    });
+    
+    updateUI();
+});
+</script>
+</body>
+</html>

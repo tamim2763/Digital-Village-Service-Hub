@@ -10,6 +10,10 @@ Digital Village Service Hub is an **HCI-compliant, Bengali-first** Spring Boot w
   - **Kalpurush**: Locally hosted, high-legibility Bengali font set as the default for all regional text.
   - **Inter**: Clean, modern sans-serif font specifically configured for English/Latin characters.
   - Typography scales automatically for perfect readability in both languages.
+- **Train Ticket Booking UI**:
+  - **Search Functionality**: Search for trains by departure and arrival stations, and date.
+  - **Seat Selection**: Interactive 2x2 seat selection map with dynamic coach switching and real-time total fare calculations.
+  - **Mock Backend Integration**: Filter active trains based on local time and dynamically generate class availabilities.
 - **Responsive Layout**: Built with Bootstrap 5 to ensure full compatibility across mobile devices and desktop screens.
 
 ## Tech Stack
