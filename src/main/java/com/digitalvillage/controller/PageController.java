@@ -43,6 +43,7 @@ public class PageController {
 						.iconClass("fa-solid fa-train-subway")
 						.titleKey("service.train.title")
 						.descriptionKey("service.train.description")
+						.link("/services/train")
 						.build(),
 				ServiceCard.builder()
 						.iconClass("fa-solid fa-file-lines")

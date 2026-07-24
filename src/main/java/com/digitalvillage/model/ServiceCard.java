@@ -15,4 +15,5 @@ public class ServiceCard {
 	String iconClass;
 	String titleKey;
 	String descriptionKey;
+	String link;
 }
