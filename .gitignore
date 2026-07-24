@@ -44,3 +44,6 @@ application-secret.yml
 ### OS Files ###
 .DS_Store
 Thumbs.db
+
+### Spring Boot Logs ###
+*.log

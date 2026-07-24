@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+
+<head th:replace="~{fragments/head :: head('weather.title')}"></head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar('services')}"></div>
+    <main class="bg-light position-relative" style="min-height: calc(100vh - 200px);">
+        <div class="container py-4">
+
+            <!-- Location Bar -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <div class="row align-items-center g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-danger fs-4"></i>
+                                <div>
+                                    <h5 class="fw-bold mb-0" id="locationDisplay" th:text="${#locale.language == 'bn'} ? ${weather.locationNameBn} : ${weather.locationNameEn}">
+                                        টাঙ্গাইল</h5>
+                                    <small class="text-muted" id="locationSubtext"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                                <button class="btn btn-outline-primary rounded-pill px-3" id="useMyLocationBtn"
+                                    onclick="detectLocation()">
+                                    <span th:text="#{weather.location.use_my}">📍 Use My Location</span>
+                                </button>
+                                <div class="position-relative flex-grow-1" style="max-width: 280px;">
+                                    <select class="form-select rounded-pill" id="locationSelect" onchange="handleLocationChange(this)">
+                                        <option value="" disabled selected th:text="#{weather.location.search_placeholder}">Search Location...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Alert Banner -->
+            <div th:if="${weather.alerts != null && !weather.alerts.isEmpty()}" th:each="alert : ${weather.alerts}">
+                <div class="alert alert-danger border-0 shadow-sm rounded-4 d-flex align-items-center gap-3 mb-3"
+                    role="alert">
+                    <i class="fa-solid fa-triangle-exclamation fs-3"></i>
+                    <div>
+                        <strong class="d-block"
+                            th:text="${#locale.language == 'bn'} ? ${alert.titleBn} : ${alert.titleEn}">Alert</strong>
+                        <span
+                            th:text="${#locale.language == 'bn'} ? ${alert.messageBn} : ${alert.messageEn}">Message</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Weather + Summary -->
+            <div th:if="${weather.current != null}"
+                class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden weather-hero-card">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-5 text-center text-md-start mb-3 mb-md-0">
+                            <div
+                                class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                                <i th:classappend="${T(com.digitalvillage.service.WeatherService).getWeatherIcon(weather.current.weatherCode)}"
+                                    class="weather-hero-icon"></i>
+                                <div>
+                                    <h1 class="display-3 fw-bold mb-0"
+                                        th:text="${#numbers.formatDecimal(weather.current.temperature, 0, 0)} + (${#locale.language == 'bn'} ? '°সে' : '°C')">
+                                        30°C</h1>
+                                    <p class="text-muted mb-0">
+                                        <span th:text="#{weather.current.feels_like}">Feels Like</span>:
+                                        <strong
+                                            th:text="${#numbers.formatDecimal(weather.current.feelsLike, 0, 0)} + (${#locale.language == 'bn'} ? '°সে' : '°C')">36°C</strong>
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="fs-5 mt-2 mb-0"
+                                th:text="${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).getWeatherConditionBn(weather.current.weatherCode)} : ${T(com.digitalvillage.service.WeatherService).getWeatherConditionEn(weather.current.weatherCode)}">
+                                Partly Cloudy
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex flex-column gap-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted"><i class="fa-solid fa-droplet text-primary me-2"></i><span
+                                            th:text="#{weather.current.rain_probability}">Rain Prob</span></span>
+                                    <strong th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(weather.current.precipitationProbability.toString())} : ${weather.current.precipitationProbability}) + '%'">80%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted"><i class="fa-solid fa-cloud-rain text-info me-2"></i><span
+                                            th:text="#{weather.current.rain_today}">Rain Today</span></span>
+                                    <strong
+                                        th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(weather.current.rainToday.toString())} + ' মিমি' : ${weather.current.rainToday} + ' mm') + ' (' + ${T(com.digitalvillage.service.WeatherService).getRainfallDescription(weather.current.rainToday, #locale.language)} + ')'">12
+                                        mm (Moderate Rain)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted"><i
+                                            class="fa-solid fa-cloud-showers-heavy text-info me-2"></i><span
+                                            th:text="#{weather.current.expected_rain}">Expected Rain</span></span>
+                                    <strong
+                                        th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(weather.current.expectedRain.toString())} + ' মিমি' : ${weather.current.expectedRain} + ' mm') + ' (' + ${T(com.digitalvillage.service.WeatherService).getRainfallDescription(weather.current.expectedRain, #locale.language)} + ')'">28
+                                        mm (Heavy Rain)</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-3 mt-md-0">
+                            <div class="weather-summary-box p-3 rounded-3" style="background-color: #f0f7ff;">
+                                <p class="mb-0 small"
+                                    th:text="${#locale.language == 'bn'} ? ${weather.summaryBn} : ${weather.summaryEn}">
+                                    Weather summary text
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div th:if="${weather.current == null}" class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-5 text-center">
+                    <i class="fa-solid fa-cloud-bolt text-muted" style="font-size: 3rem;"></i>
+                    <p class="mt-3 text-muted" th:text="#{weather.error.loading}">Could not load weather data.</p>
+                    <button class="btn btn-primary rounded-pill px-4" onclick="location.reload()"
+                        th:text="#{weather.error.retry}">Retry</button>
+                </div>
+            </div>
+
+            <!-- Details Grid -->
+            <div th:if="${weather.current != null}" class="row g-3 mb-4 justify-content-center">
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm rounded-4 text-center p-3 h-100">
+                        <i class="fa-solid fa-droplet text-info fs-4 mb-2"></i>
+                        <small class="text-muted" th:text="#{weather.details.humidity}">Humidity</small>
+                        <strong th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(weather.current.humidity.toString())} : ${weather.current.humidity}) + '%'">78%</strong>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm rounded-4 text-center p-3 h-100">
+                        <i class="fa-solid fa-wind text-secondary fs-4 mb-2"></i>
+                        <small class="text-muted" th:text="#{weather.details.wind}">Wind</small>
+                        <strong th:text="${#numbers.formatDecimal(weather.current.windSpeed, 0, 0)} + (${#locale.language == 'bn'} ? ' কিমি/ঘণ্টা' : ' km/h')">12
+                            km/h</strong>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm rounded-4 text-center p-3 h-100">
+                        <i class="fa-solid fa-sun text-warning fs-4 mb-2"></i>
+                        <small class="text-muted" th:text="#{weather.details.sunrise}">Sunrise</small>
+                        <strong th:text="${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(weather.current.sunrise)} : ${weather.current.sunrise}">05:24 AM</strong>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm rounded-4 text-center p-3 h-100">
+                        <i class="fa-solid fa-moon text-indigo fs-4 mb-2"></i>
+                        <small class="text-muted" th:text="#{weather.details.sunset}">Sunset</small>
+                        <strong th:text="${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(weather.current.sunset)} : ${weather.current.sunset}">06:45 PM</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Symbol Legend -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h6 class="fw-bold mb-3 text-muted"
+                        th:text="${#locale.language == 'bn'} ? 'আবহাওয়া চিহ্নের অর্থ' : 'Weather Symbol Meanings'">
+                        আবহাওয়া চিহ্নের অর্থ</h6>
+                    <div class="row g-3">
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-sun text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'পরিষ্কার / রোদ' : 'Clear / Sunny'">পরিষ্কার /
+                                রোদ</span>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-cloud-sun text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'আংশিক মেঘলা' : 'Partly Cloudy'">আংশিক
+                                মেঘলা</span>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-cloud text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'মেঘলা' : 'Cloudy'">মেঘলা</span>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-smog text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'কুয়াশা' : 'Fog / Mist'">কুয়াশা</span>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-cloud-rain text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'হালকা বৃষ্টি' : 'Light Rain'">হালকা
+                                বৃষ্টি</span>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-cloud-showers-heavy text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'ভারী বৃষ্টি' : 'Heavy Rain'">ভারী বৃষ্টি</span>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-cloud-bolt text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'বজ্রবৃষ্টি' : 'Thunderstorm'">বজ্রবৃষ্টি</span>
+                        </div>
+                        <div class="col-6 col-md-4 col-lg-3 d-flex align-items-center">
+                            <i class="fa-solid fa-droplet text-primary fs-4 me-3"
+                                style="width: 30px; text-align: center;"></i>
+                            <span class="small fw-medium"
+                                th:text="${#locale.language == 'bn'} ? 'বৃষ্টির সম্ভাবনা' : 'Rain Probability'">বৃষ্টির
+                                সম্ভাবনা</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hourly Forecast -->
+            <div th:if="${weather.hourlyForecasts != null && !weather.hourlyForecasts.isEmpty()}"
+                class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3" th:text="#{weather.hourly.title}">Hourly Forecast</h5>
+                    <div class="hourly-scroll d-flex gap-3 overflow-auto pb-2">
+                        <div th:each="hour : ${weather.hourlyForecasts}"
+                            class="hourly-item text-center flex-shrink-0 p-3 rounded-3"
+                            style="min-width: 80px; background: #f8f9fa;">
+                            <small class="d-block text-muted fw-bold" th:text="${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(hour.time)} : ${hour.time}">02 PM</small>
+                            <i th:classappend="${T(com.digitalvillage.service.WeatherService).getWeatherIcon(hour.weatherCode)}"
+                                class="my-2 fs-4" style="color: #2563EB;"></i>
+                            <div class="fw-bold"
+                                th:text="${#numbers.formatDecimal(hour.temperature, 0, 0)} + (${#locale.language == 'bn'} ? '°সে' : '°C')">
+                                30°C</div>
+                            <div class="text-primary mt-1" style="font-size: 0.8rem;"
+                                th:title="${#locale.language == 'bn'} ? 'বৃষ্টির সম্ভাবনা' : 'Rain Probability'">
+                                <i class="fa-solid fa-droplet me-1"></i>
+                                <span th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(hour.precipitationProbability.toString())} : ${hour.precipitationProbability}) + '%'">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Farmer Advisory -->
+            <div th:if="${weather.advisories != null && !weather.advisories.isEmpty()}"
+                class="card border-0 shadow-sm rounded-4 mb-4" style="border-left: 4px solid #16a34a !important;">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3 text-success"><i class="fa-solid fa-seedling me-2"></i><span
+                            th:text="#{weather.farmer.title}">Farmer Advisory</span></h5>
+                    <div class="row g-3">
+                        <div class="col-md-6 col-lg-3" th:each="adv : ${weather.advisories}">
+                            <div class="p-3 rounded-3 h-100"
+                                th:classappend="${adv.favorable} ? 'advisory-good' : 'advisory-warn'">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <span class="fs-4" th:text="${adv.icon}">💧</span>
+                                    <strong
+                                        th:text="${#locale.language == 'bn'} ? ${adv.titleBn} : ${adv.titleEn}">Irrigation</strong>
+                                </div>
+                                <p class="small mb-0"
+                                    th:text="${#locale.language == 'bn'} ? ${adv.messageBn} : ${adv.messageEn}">Advisory
+                                    message</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7-Day Forecast -->
+            <div th:if="${weather.dailyForecasts != null && !weather.dailyForecasts.isEmpty()}"
+                class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3" th:text="#{weather.daily.title}">7-Day Forecast</h5>
+                    <div class="list-group list-group-flush">
+                        <!-- Column Headers -->
+                        <div class="list-group-item px-0 py-2 border-bottom bg-transparent text-muted small fw-bold">
+                            <div class="row align-items-center g-0">
+                                <div class="col-2" th:text="${#locale.language == 'bn'} ? 'দিন' : 'Day'">দিন</div>
+                                <div class="col-2 text-center"
+                                    th:text="${#locale.language == 'bn'} ? 'অবস্থা' : 'Icon'">অবস্থা</div>
+                                <div class="col-4 text-center"
+                                    th:text="${#locale.language == 'bn'} ? 'সর্বনিম্ন - সর্বোচ্চ তাপমাত্রা' : 'Min - Max Temp'">
+                                    সর্বনিম্ন - সর্বোচ্চ তাপমাত্রা</div>
+                                <div class="col-2 text-end"
+                                    th:text="${#locale.language == 'bn'} ? 'বৃষ্টির সম্ভাবনা' : 'Rain Probability'">
+                                    বৃষ্টির সম্ভাবনা</div>
+                                <div class="col-2 text-end"
+                                    th:text="${#locale.language == 'bn'} ? 'বৃষ্টির পরিমাণ' : 'Rain Amount'">বৃষ্টির
+                                    পরিমাণ</div>
+                            </div>
+                        </div>
+                        <!-- Data Rows -->
+                        <div th:each="day,dayStat : ${weather.dailyForecasts}"
+                            class="list-group-item px-0 py-3 border-bottom">
+                            <div class="row align-items-center g-0">
+                                <div class="col-2 fw-bold" th:text="${#locale.language == 'bn'} ? (dayStat.index == 0 ? 'আজ' : ${day.dayNameBn}) : (dayStat.index == 0 ? 'Today' : ${day.dayNameEn})">
+                                    শনি</div>
+                                <div class="col-2 text-center">
+                                    <i th:classappend="${T(com.digitalvillage.service.WeatherService).getWeatherIcon(day.weatherCode)}"
+                                        class="fs-5" style="color: #2563EB;"></i>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center gap-1">
+                                    <span class="fw-bold"
+                                        th:text="${#numbers.formatDecimal(day.tempMin, 0, 0)} + (${#locale.language == 'bn'} ? '°সে' : '°C')">25°C</span>
+                                    <div class="temp-bar mx-1 flex-grow-1" style="max-width: 50px;"></div>
+                                    <span class="fw-bold"
+                                        th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(#numbers.formatDecimal(day.tempMax, 0, 0))} : ${#numbers.formatDecimal(day.tempMax, 0, 0)}) + (${#locale.language == 'bn'} ? '°সে' : '°C')">31°C</span>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <i class="fa-solid fa-droplet text-primary me-1 d-none d-sm-inline"
+                                        style="font-size: 0.7rem;"></i>
+                                    <small th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(day.precipitationProbabilityMax.toString())} : ${day.precipitationProbabilityMax}) + '%'">80%</small>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <small class="text-muted" th:text="(${#locale.language == 'bn'} ? ${T(com.digitalvillage.service.WeatherService).toBengaliDigits(#numbers.formatDecimal(day.rainSum, 0, 0))} : ${#numbers.formatDecimal(day.rainSum, 0, 0)}) + (${#locale.language == 'bn'} ? 'মিমি' : 'mm') + ' (' + ${T(com.digitalvillage.service.WeatherService).getRainfallDescription(day.rainSum, #locale.language)} + ')'">28mm (Moderate Rain)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- Loading Overlay (hidden by default) -->
+        <div id="loadingOverlay"
+            class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center bg-white d-none"
+            style="z-index: 1050; opacity: 0.9;">
+            <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h4 class="text-primary fw-bold"
+                th:text="${#locale.language == 'bn'} ? 'আবহাওয়ার তথ্য আনা হচ্ছে...' : 'Loading Weather Data...'">
+                Loading...</h4>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const weatherApiUrl = /*[[@{/services/weather/api}]]*/ '/services/weather/api';
+        const currentLang = /*[[${#locale.language}]]*/ 'bn';
+
+        // BD Locations dataset (loaded lazily)
+        let bdLocations = null;
+
+        async function loadLocations() {
+            if (bdLocations) return bdLocations;
+            try {
+                const resp = await fetch(/*[[@{/data/bd-locations.json}]]*/ '/data/bd-locations.json');
+                bdLocations = await resp.json();
+                return bdLocations;
+            } catch (e) {
+                console.error('Failed to load locations:', e);
+                return [];
+            }
+        }
+
+        // Geolocation Detection
+        function detectLocation() {
+            const btn = document.getElementById('useMyLocationBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i>' + (currentLang === 'bn' ? 'অবস্থান নির্ণয় হচ্ছে...' : 'Detecting...');
+
+            if (!navigator.geolocation) {
+                alert(currentLang === 'bn' ? 'আপনার ব্রাউজার অবস্থান সেবা সমর্থন করে না।' : 'Your browser does not support geolocation.');
+                resetLocationBtn(btn);
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    try {
+                        // BigDataCloud reverse geocoding (client-side, no API key)
+                        const geoResp = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=bn`);
+                        const geoData = await geoResp.json();
+
+                        const division = geoData.principalSubdivision || '';
+                        const district = geoData.city || geoData.locality || '';
+                        let upazila = '';
+
+                        // Extract upazila from administrative levels
+                        if (geoData.localityInfo && geoData.localityInfo.administrative) {
+                            const upazilaLevel = geoData.localityInfo.administrative.find(a => a.description && a.description.includes('উপজেলা'));
+                            if (upazilaLevel) upazila = upazilaLevel.name;
+                        }
+
+                        const locationBn = upazila ? `${upazila}, ${district}` : district;
+                        const locationEn = geoData.locality || district;
+                        
+                        document.getElementById('locationDisplay').textContent = currentLang === 'bn' ? locationBn : locationEn;
+                        document.getElementById('locationSubtext').textContent = division;
+
+                        // Save to cookies and localStorage
+                        saveLocationState(lat, lon, locationBn, locationEn, division, division);
+
+                        // Fetch weather for detected location
+                        showLoading();
+                        await fetchWeatherAndUpdate(lat, lon, locationBn, locationEn);
+                    } catch (e) {
+                        console.error('Reverse geocoding failed:', e);
+                    }
+                    resetLocationBtn(btn);
+                },
+                (error) => {
+                    alert(currentLang === 'bn'
+                        ? 'অবস্থান ব্যবহারের অনুমতি দেওয়া হয়নি। নিচে থেকে আপনার এলাকা বেছে নিন।'
+                        : 'Location permission denied. Please select your area from the search.');
+                    resetLocationBtn(btn);
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        }
+
+        function resetLocationBtn(btn) {
+            btn.disabled = false;
+            btn.innerHTML = currentLang === 'bn' ? '📍 আমার অবস্থান ব্যবহার করুন' : '📍 Use My Location';
+        }
+
+        // Populate Location Dropdown
+        document.addEventListener('DOMContentLoaded', async () => {
+            const select = document.getElementById('locationSelect');
+            if (select) {
+                const locations = await loadLocations();
+                locations.forEach((loc, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    const label = currentLang === 'bn' ? loc.nameBn : loc.nameEn;
+                    const parent = currentLang === 'bn' ? (loc.parentBn || '') : (loc.parentEn || '');
+                    option.textContent = parent ? `${label} (${parent})` : label;
+                    option.dataset.lat = loc.lat;
+                    option.dataset.lon = loc.lon;
+                    option.dataset.nameBn = loc.nameBn;
+                    option.dataset.nameEn = loc.nameEn;
+                    option.dataset.parentBn = loc.parentBn || '';
+                    option.dataset.parentEn = loc.parentEn || '';
+                    select.appendChild(option);
+                });
+            }
+        });
+
+        function handleLocationChange(select) {
+            const option = select.options[select.selectedIndex];
+            if (!option.value) return;
+            selectLocation(
+                parseFloat(option.dataset.lat),
+                parseFloat(option.dataset.lon),
+                option.dataset.nameBn,
+                option.dataset.nameEn,
+                option.dataset.parentBn,
+                option.dataset.parentEn
+            );
+            // Reset to placeholder so user can select another if needed
+            select.value = "";
+        }
+
+        function showLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.remove('d-none');
+        }
+
+        async function selectLocation(lat, lon, nameBn, nameEn, parentBn, parentEn) {
+            document.getElementById('locationDisplay').textContent = currentLang === 'bn' ? nameBn : nameEn;
+            document.getElementById('locationSubtext').textContent = currentLang === 'bn' ? parentBn : parentEn;
+            saveLocationState(lat, lon, nameBn, nameEn, parentBn, parentEn);
+            showLoading();
+            await fetchWeatherAndUpdate(lat, lon, nameBn, nameEn);
+        }
+
+        async function fetchWeatherAndUpdate(lat, lon, locationBn, locationEn) {
+            try {
+                // Direct redirect to utilize server-side rendering and caching properly
+                window.location.href = `/services/weather?lat=${lat}&lon=${lon}&locationBn=${encodeURIComponent(locationBn)}&locationEn=${encodeURIComponent(locationEn)}`;
+            } catch (e) {
+                console.error('Failed to fetch weather:', e);
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
+        }
+
+        // Function to set cookie
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        // Function to get cookie
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function saveLocationState(lat, lon, nameBn, nameEn, divisionBn, divisionEn) {
+            // Save to localStorage for client-side use (like division subtext)
+            localStorage.setItem('weather_location', JSON.stringify({ lat, lon, locationBn: nameBn, locationEn: nameEn, divisionBn: divisionBn, divisionEn: divisionEn }));
+
+            // Save to cookies for server-side initial rendering (expires in 365 days)
+            setCookie('weather_lat', lat, 365);
+            setCookie('weather_lon', lon, 365);
+            setCookie('weather_location_bn', encodeURIComponent(nameBn), 365);
+            setCookie('weather_location_en', encodeURIComponent(nameEn), 365);
+        }
+
+        // On page load: restore saved location text (division) if available
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('weather_location');
+            if (saved) {
+                try {
+                    const loc = JSON.parse(saved);
+                    // The server already rendered the correct location based on cookies or URL.
+                    // We just need to update the division subtext if it matches the current coordinates.
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const currentLat = /*[[${weather.latitude}]]*/ 0;
+
+                    if (Math.abs(loc.lat - currentLat) < 0.001) {
+                        const divText = currentLang === 'bn' ? loc.divisionBn : loc.divisionEn;
+                        if (divText) {
+                            document.getElementById('locationSubtext').textContent = divText;
+                        } else if (loc.division) {
+                            document.getElementById('locationSubtext').textContent = loc.division;
+                        }
+                    }
+                } catch (e) { }
+            }
+
+            // If the user visits the page, ensure the server-rendered location is synced to cookies 
+            // (useful if they clicked a direct link with ?lat=...)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('lat') && urlParams.has('lon')) {
+                saveLocationState(
+                    urlParams.get('lat'),
+                    urlParams.get('lon'),
+                /*[[${weather.locationNameBn}]]*/ '',
+                /*[[${weather.locationNameEn}]]*/ '',
+                    '',
+                    ''
+                );
+            }
+        });
+        /*]]>*/
+    </script>
+
+    <style>
+        .weather-hero-card {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f4f8 100%);
+        }
+
+        .weather-hero-icon {
+            font-size: 3.5rem;
+            color: #2563EB;
+        }
+
+        .hourly-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .hourly-scroll::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
+
+        .hourly-item {
+            transition: background-color 0.2s;
+        }
+
+        .hourly-item:hover {
+            background-color: #e8f4f8 !important;
+        }
+
+        .advisory-good {
+            background-color: #f0fdf4;
+            border-left: 3px solid #16a34a;
+        }
+
+        .advisory-warn {
+            background-color: #fefce8;
+            border-left: 3px solid #d97706;
+        }
+
+        .temp-bar {
+            flex: 1;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #f59e0b);
+            border-radius: 2px;
+            min-width: 30px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f7ff;
+        }
+    </style>
+</body>
+
+</html>
