@@ -49,7 +49,7 @@ The application requires a MySQL database. Create the database and user before s
 
 ```sql
 CREATE DATABASE digital_village_service_hub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-``
+```
 
 The application is configured to look for the following credentials by default:
 - **User**: `root`
@@ -68,14 +68,19 @@ $env:MYSQL_PASSWORD = 'YOUR_PASSWORD'
 
 ### 2. Running the Application
 
-Ensure you have Java 21 installed. Use the Maven wrapper to run the application with the `dev` profile. The `dev` profile disables Thymeleaf caching for easier UI development and runs the server on port `8081`.
+Ensure you have Java 21 installed. Use the Maven wrapper to run the application with the `dev` profile. The `dev` profile disables Thymeleaf caching for easier UI development and runs the server on port `8081`. 
+
+Make sure to pass your database password via an environment variable when running the command:
+
+```powershell
+# Windows (PowerShell)
+$env:MYSQL_PASSWORD = 'YOUR_PASSWORD'
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
+```
 
 ```bash
-# Windows
-.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
-
 # Mac/Linux
-./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+MYSQL_PASSWORD='YOUR_PASSWORD' ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 Once running, access the application at: **http://localhost:8081**

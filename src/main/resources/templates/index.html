@@ -20,22 +20,10 @@
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="hero-panel">
-                        <span class="mini-stat" th:text="#{home.hero.panel.label}">Platform Info</span>
-                        <div class="hero-panel-grid">
-                            <div class="hero-badge">
-                                <strong th:text="#{home.hero.panel.tech.title}">Java 21 + Spring Boot 3.x</strong>
-                                <span th:text="#{home.hero.panel.tech.desc}">Modern baseline.</span>
-                            </div>
-                            <div class="hero-badge">
-                                <strong th:text="#{home.hero.panel.ui.title}">Thymeleaf + Bootstrap 5</strong>
-                                <span th:text="#{home.hero.panel.ui.desc}">Responsive pages.</span>
-                            </div>
-                            <div class="hero-badge">
-                                <strong th:text="#{home.hero.panel.db.title}">MySQL + Spring Data JPA</strong>
-                                <span th:text="#{home.hero.panel.db.desc}">Data stored securely.</span>
-                            </div>
-                        </div>
+                    <div class="text-center text-lg-end position-relative">
+                        <!-- Decorative background blob (optional but adds a modern touch) -->
+                        <div class="position-absolute bg-primary rounded-circle" style="width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; z-index: 0; filter: blur(40px);"></div>
+                        <img th:src="@{/images/hero-illustration.png}" alt="Digital Village Service Hub" class="img-fluid rounded-4 shadow-lg position-relative" style="max-height: 450px; object-fit: cover; z-index: 1; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                     </div>
                 </div>
             </div>
