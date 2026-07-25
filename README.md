@@ -18,6 +18,11 @@ Digital Village Service Hub is an **HCI-compliant, Bengali-first** Spring Boot w
   - **Hyper-Local Forecasts**: Real-time geolocation and dropdown-based location selection using the Open-Meteo API.
   - **Comprehensive Weather Data**: Current conditions, hourly rain probability, and a 7-day forecast.
   - **Intelligent Farmer Advisories**: Dynamic agricultural recommendations (Irrigation, Pesticide Spraying, Harvesting) calculated on-the-fly based on precipitation probability, rain volume, and wind speed.
+- **Government Forms Digital Assistant**:
+  - **Task-Based Architecture**: Simplifies navigation by grouping services (e.g., Identity, Land, Agriculture) based on citizen intent rather than government departments.
+  - **Error Prevention UI**: Interactive document checklists, visual step-by-step timelines, and highlighted warning/mistake sections to reduce cognitive load and prevent multiple office visits.
+  - **Safety First**: Directly routes users to official `.gov.bd` portals rather than hosting static PDFs, preventing issues with outdated forms.
+  - **Dynamic Data Source**: Powered by a centralized JSON dataset, allowing easy addition of new services without recompiling Java code.
 - **Responsive Layout**: Built with Bootstrap 5 to ensure full compatibility across mobile devices and desktop screens.
 
 ## Tech Stack
@@ -44,7 +49,7 @@ The application requires a MySQL database. Create the database and user before s
 
 ```sql
 CREATE DATABASE digital_village_service_hub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
+``
 
 The application is configured to look for the following credentials by default:
 - **User**: `root`

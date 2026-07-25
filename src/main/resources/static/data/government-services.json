@@ -1,0 +1,917 @@
+[
+  {
+    "slug": "identity-certificates",
+    "iconClass": "fa-solid fa-id-card",
+    "iconEmoji": "📜",
+    "nameBn": "পরিচয়পত্র ও সনদ",
+    "nameEn": "Identity & Certificates",
+    "services": [
+      {
+        "slug": "birth-registration",
+        "nameBn": "জন্ম নিবন্ধন",
+        "nameEn": "Birth Registration",
+        "purposeBn": "যেকোনো নাগরিকের রাষ্ট্রীয় পরিচিতি এবং অন্যান্য সেবা প্রাপ্তির জন্য জন্ম নিবন্ধন বাধ্যতামূলক।",
+        "purposeEn": "Birth registration is mandatory for state recognition and access to other services.",
+        "feeBn": "০ - ৫০ টাকা",
+        "feeEn": "0 - 50 BDT",
+        "processingTimeBn": "৭ - ১৫ দিন",
+        "processingTimeEn": "7 - 15 Days",
+        "submissionLocationBn": "ইউনিয়ন পরিষদ / পৌরসভা / সিটি কর্পোরেশন (অনলাইন আবেদন)",
+        "submissionLocationEn": "Union Parishad / Municipality / City Corporation (Online App)",
+        "online": true,
+        "eligibilityBn": [
+          "যেকোনো বাংলাদেশি নাগরিক",
+          "জন্মের ৪৫ দিনের মধ্যে আবেদন করলে বিনামূল্যে"
+        ],
+        "eligibilityEn": [
+          "Any Bangladeshi citizen",
+          "Free if applied within 45 days of birth"
+        ],
+        "documentsBn": [
+          "হাসপাতালের ছাড়পত্র বা EPI (টিকা) কার্ড",
+          "বাবা-মায়ের জাতীয় পরিচয়পত্রের কপি",
+          "ঠিকানার প্রমাণ (বিদ্যুৎ বিল/হোল্ডিং ট্যাক্স)"
+        ],
+        "documentsEn": [
+          "Hospital discharge certificate or EPI (vaccine) card",
+          "Copy of parents' NID cards",
+          "Proof of address (utility bill/holding tax)"
+        ],
+        "steps": [
+          {
+            "titleBn": "তথ্য সংগ্রহ",
+            "titleEn": "Collect Info",
+            "descBn": "প্রয়োজনীয় কাগজপত্র সংগ্রহ করুন।",
+            "descEn": "Gather all required documents."
+          },
+          {
+            "titleBn": "অনলাইন আবেদন",
+            "titleEn": "Online Application",
+            "descBn": "BDRIS পোর্টালে তথ্য পূরণ করে সাবমিট করুন।",
+            "descEn": "Fill out and submit the form on the BDRIS portal."
+          },
+          {
+            "titleBn": "প্রিন্ট ও জমা",
+            "titleEn": "Print & Submit",
+            "descBn": "আবেদনপত্র প্রিন্ট করে স্থানীয় অফিসে জমা দিন।",
+            "descEn": "Print the application and submit it to the local office."
+          },
+          {
+            "titleBn": "সনদ গ্রহণ",
+            "titleEn": "Receive Certificate",
+            "descBn": "অনুমোদনের পর ডিজিটাল সনদ সংগ্রহ করুন।",
+            "descEn": "Collect the digital certificate after approval."
+          }
+        ],
+        "commonMistakesBn": [
+          "ইংরেজি ও বাংলায় নাম ভিন্ন লেখা",
+          "বয়স প্রমাণের সঠিক কাগজ না দেওয়া"
+        ],
+        "commonMistakesEn": [
+          "Spelling names differently in English and Bengali",
+          "Not providing correct proof of age"
+        ],
+        "warningsBn": [
+          "দালালের মাধ্যমে আবেদন করবেন না। সরাসরি সরকারি ওয়েবসাইটে আবেদন করুন।"
+        ],
+        "warningsEn": [
+          "Do not apply through middlemen. Apply directly on the official website."
+        ],
+        "officialWebsiteUrl": "https://bdris.gov.bd/",
+        "officialContactBn": "স্থানীয় ইউপি/পৌরসভা অফিস",
+        "officialContactEn": "Local UP/Municipality Office"
+      },
+      {
+        "slug": "death-registration",
+        "nameBn": "মৃত্যু নিবন্ধন",
+        "nameEn": "Death Registration",
+        "purposeBn": "উত্তরাধিকার সনদ ও সম্পত্তি বন্টনের জন্য মৃত ব্যক্তির মৃত্যু নিবন্ধন করা আবশ্যক।",
+        "purposeEn": "Death registration is required for inheritance certificates and property distribution.",
+        "feeBn": "০ - ৫০ টাকা",
+        "feeEn": "0 - 50 BDT",
+        "processingTimeBn": "৭ - ১৫ দিন",
+        "processingTimeEn": "7 - 15 Days",
+        "submissionLocationBn": "ইউনিয়ন পরিষদ / পৌরসভা / সিটি কর্পোরেশন",
+        "submissionLocationEn": "Union Parishad / Municipality / City Corporation",
+        "online": true,
+        "eligibilityBn": [
+          "মৃত ব্যক্তির আত্মীয় বা উত্তরাধিকারী"
+        ],
+        "eligibilityEn": [
+          "Relative or heir of the deceased person"
+        ],
+        "documentsBn": [
+          "হাসপাতালের মৃত্যু সনদ (যদি থাকে)",
+          "মৃত ব্যক্তির জাতীয় পরিচয়পত্র",
+          "আবেদনকারীর জাতীয় পরিচয়পত্র"
+        ],
+        "documentsEn": [
+          "Hospital death certificate (if applicable)",
+          "NID of the deceased",
+          "NID of the applicant"
+        ],
+        "steps": [
+          {
+            "titleBn": "অনলাইন আবেদন",
+            "titleEn": "Online Application",
+            "descBn": "ওয়েবসাইটে আবেদন করুন।",
+            "descEn": "Apply on the website."
+          },
+          {
+            "titleBn": "কাগজপত্র জমা",
+            "titleEn": "Submit Docs",
+            "descBn": "অফিসে কাগজ জমা দিন।",
+            "descEn": "Submit papers at the office."
+          },
+          {
+            "titleBn": "সনদ গ্রহণ",
+            "titleEn": "Receive Certificate",
+            "descBn": "সনদ সংগ্রহ করুন।",
+            "descEn": "Collect the certificate."
+          }
+        ],
+        "commonMistakesBn": [],
+        "commonMistakesEn": [],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://bdris.gov.bd/",
+        "officialContactBn": "স্থানীয় ইউপি/পৌরসভা অফিস",
+        "officialContactEn": "Local UP/Municipality Office"
+      },
+      {
+        "slug": "nid-correction",
+        "nameBn": "জাতীয় পরিচয়পত্র সংশোধন",
+        "nameEn": "NID Correction",
+        "purposeBn": "জাতীয় পরিচয়পত্রে থাকা ভুল তথ্য (নাম, বয়স, ঠিকানা) সংশোধন করা।",
+        "purposeEn": "Correct erroneous information (name, age, address) on the National ID card.",
+        "feeBn": "২৩০ - ৩৪৫ টাকা",
+        "feeEn": "230 - 345 BDT",
+        "processingTimeBn": "২০ - ২৫ দিন",
+        "processingTimeEn": "20 - 25 Days",
+        "submissionLocationBn": "অনলাইন এবং উপজেলা নির্বাচন অফিস",
+        "submissionLocationEn": "Online and Upazila Election Office",
+        "online": true,
+        "eligibilityBn": [
+          "যেকোনো এনআইডি ধারী নাগরিক"
+        ],
+        "eligibilityEn": [
+          "Any citizen with an NID"
+        ],
+        "documentsBn": [
+          "শিক্ষাগত যোগ্যতার সনদ (SSC বা সমমান)",
+          "জন্ম নিবন্ধন বা পাসপোর্ট",
+          "পিতামাতার এনআইডি (পিতামাতার নাম সংশোধনের ক্ষেত্রে)"
+        ],
+        "documentsEn": [
+          "Educational certificate (SSC or equivalent)",
+          "Birth certificate or Passport",
+          "Parents' NID (for parent name correction)"
+        ],
+        "steps": [
+          {
+            "titleBn": "পোর্টালে লগইন",
+            "titleEn": "Login to Portal",
+            "descBn": "NID ওয়েবসাইটে একাউন্ট করুন।",
+            "descEn": "Create an account on the NID website."
+          },
+          {
+            "titleBn": "তথ্য পরিবর্তন",
+            "titleEn": "Edit Info",
+            "descBn": "ভুল তথ্য পরিবর্তন করুন।",
+            "descEn": "Edit the incorrect information."
+          },
+          {
+            "titleBn": "ফি প্রদান",
+            "titleEn": "Pay Fee",
+            "descBn": "মোবাইল ব্যাংকিং এর মাধ্যমে ফি দিন।",
+            "descEn": "Pay fee via mobile banking."
+          },
+          {
+            "titleBn": "প্রমাণ আপলোড",
+            "titleEn": "Upload Proof",
+            "descBn": "সঠিক প্রমাণের ছবি আপলোড করুন।",
+            "descEn": "Upload photos of correct proofs."
+          }
+        ],
+        "commonMistakesBn": [
+          "যথেষ্ট প্রমাণ না দেওয়া",
+          "ফি দেওয়ার আগেই আবেদন শুরু করা"
+        ],
+        "commonMistakesEn": [
+          "Not providing enough evidence",
+          "Starting application before paying the fee"
+        ],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://services.nidw.gov.bd/",
+        "officialContactBn": "হেল্পলাইন: ১০৫",
+        "officialContactEn": "Helpline: 105"
+      },
+      {
+        "slug": "citizenship-certificate",
+        "nameBn": "নাগরিকত্ব সনদ",
+        "nameEn": "Citizenship Certificate",
+        "purposeBn": "স্থানীয় বাসিন্দা হিসেবে প্রমাণপত্র, যা চাকরি বা পাসপোর্ট করার সময় প্রয়োজন হয়।",
+        "purposeEn": "Proof of local residency, required for jobs or passport applications.",
+        "feeBn": "২৫০ টাকা",
+        "feeEn": "250 BDT",
+        "processingTimeBn": "৭ দিন",
+        "processingTimeEn": "7 Days",
+        "submissionLocationBn": "ইউনিয়ন পরিষদ / পৌরসভা (প্রত্যয়ন পোর্টাল)",
+        "submissionLocationEn": "Union Parishad / Municipality (Prottoyon Portal)",
+        "online": true,
+        "eligibilityBn": [
+          "সংশ্লিষ্ট এলাকার স্থায়ী বা বর্তমান বাসিন্দা"
+        ],
+        "eligibilityEn": [
+          "Permanent or current resident of the area"
+        ],
+        "documentsBn": [
+          "জাতীয় পরিচয়পত্র বা জন্ম নিবন্ধন",
+          "পিতামাতার এনআইডি",
+          "বিদ্যুৎ বিল বা হোল্ডিং ট্যাক্সের কপি"
+        ],
+        "documentsEn": [
+          "NID or Birth Registration",
+          "Parents' NID",
+          "Utility bill or holding tax copy"
+        ],
+        "steps": [
+          {
+            "titleBn": "অনলাইন আবেদন",
+            "titleEn": "Online Apply",
+            "descBn": "প্রত্যয়ন পোর্টালে আবেদন করুন।",
+            "descEn": "Apply on the Prottoyon portal."
+          },
+          {
+            "titleBn": "যাচাইকরণ",
+            "titleEn": "Verification",
+            "descBn": "চেয়ারম্যান কর্তৃক যাচাই।",
+            "descEn": "Verification by the Chairman."
+          },
+          {
+            "titleBn": "ডাউনলোড",
+            "titleEn": "Download",
+            "descBn": "ডিজিটাল সনদ ডাউনলোড করুন।",
+            "descEn": "Download the digital certificate."
+          }
+        ],
+        "commonMistakesBn": [],
+        "commonMistakesEn": [],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://prottoyon.gov.bd/",
+        "officialContactBn": "স্থানীয় ইউপি অফিস",
+        "officialContactEn": "Local UP Office"
+      },
+      {
+        "slug": "warish-certificate",
+        "nameBn": "ওয়ারিশ সনদ",
+        "nameEn": "Inheritance Certificate",
+        "purposeBn": "মৃত ব্যক্তির সম্পত্তির আইনি উত্তরাধিকারীদের নামের তালিকা সম্বলিত সরকারি সনদ।",
+        "purposeEn": "Official certificate containing the list of legal heirs for a deceased person's property.",
+        "feeBn": "৫০ - ২০০ টাকা",
+        "feeEn": "50 - 200 BDT",
+        "processingTimeBn": "৭ - ১০ দিন",
+        "processingTimeEn": "7 - 10 Days",
+        "submissionLocationBn": "ইউনিয়ন পরিষদ / পৌরসভা",
+        "submissionLocationEn": "Union Parishad / Municipality",
+        "online": false,
+        "eligibilityBn": [
+          "মৃত ব্যক্তির বৈধ উত্তরাধিকারী"
+        ],
+        "eligibilityEn": [
+          "Legal heir of the deceased"
+        ],
+        "documentsBn": [
+          "মৃত ব্যক্তির মৃত্যু সনদ",
+          "সকল উত্তরাধিকারীর এনআইডি কপি",
+          "আবেদনকারী বা মৃত ব্যক্তির জমির পর্চা"
+        ],
+        "documentsEn": [
+          "Death certificate of the deceased",
+          "NID copies of all heirs",
+          "Land record of applicant or deceased"
+        ],
+        "steps": [
+          {
+            "titleBn": "ফরম সংগ্রহ",
+            "titleEn": "Get Form",
+            "descBn": "অফিস থেকে ফরম নিন।",
+            "descEn": "Get form from the office."
+          },
+          {
+            "titleBn": "স্বাক্ষর গ্রহণ",
+            "titleEn": "Get Signatures",
+            "descBn": "স্থানীয় মেম্বার ও গণ্যমান্য ব্যক্তির স্বাক্ষর নিন।",
+            "descEn": "Get signatures from local member and elites."
+          },
+          {
+            "titleBn": "জমা দিন",
+            "titleEn": "Submit",
+            "descBn": "অফিসে ফি সহ জমা দিন।",
+            "descEn": "Submit with fee at the office."
+          }
+        ],
+        "commonMistakesBn": [
+          "মৃত্যু সনদ না থাকা"
+        ],
+        "commonMistakesEn": [
+          "Not having a death certificate"
+        ],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "",
+        "officialContactBn": "স্থানীয় ইউপি অফিস",
+        "officialContactEn": "Local UP Office"
+      }
+    ]
+  },
+  {
+    "slug": "passport-travel",
+    "iconClass": "fa-solid fa-passport",
+    "iconEmoji": "🛂",
+    "nameBn": "পাসপোর্ট ও ভ্রমণ",
+    "nameEn": "Passport & Travel",
+    "services": [
+      {
+        "slug": "new-epassport",
+        "nameBn": "নতুন ই-পাসপোর্ট",
+        "nameEn": "New e-Passport",
+        "purposeBn": "ভ্রমণ বা বিদেশে কাজের উদ্দেশ্যে যাওয়ার জন্য ই-পাসপোর্টের আবেদন।",
+        "purposeEn": "Application for an e-Passport for travel or overseas employment.",
+        "feeBn": "৪,০২৫ - ১৩,৮০০ টাকা",
+        "feeEn": "4,025 - 13,800 BDT",
+        "processingTimeBn": "২ - ২১ দিন",
+        "processingTimeEn": "2 - 21 Days",
+        "submissionLocationBn": "আঞ্চলিক পাসপোর্ট অফিস",
+        "submissionLocationEn": "Regional Passport Office",
+        "online": true,
+        "eligibilityBn": [
+          "যেকোনো বাংলাদেশি নাগরিক"
+        ],
+        "eligibilityEn": [
+          "Any Bangladeshi citizen"
+        ],
+        "documentsBn": [
+          "অনলাইন আবেদনের প্রিন্ট কপি ও অ্যাপয়েন্টমেন্ট লেটার",
+          "জাতীয় পরিচয়পত্র বা অনলাইন জন্ম নিবন্ধন (মূল কপি)",
+          "পেশার প্রমাণপত্র (প্রযোজ্য ক্ষেত্রে)"
+        ],
+        "documentsEn": [
+          "Printed online application and appointment letter",
+          "NID or online Birth Registration (original)",
+          "Proof of profession (if applicable)"
+        ],
+        "steps": [
+          {
+            "titleBn": "অনলাইন আবেদন",
+            "titleEn": "Online App",
+            "descBn": "ePassport পোর্টালে ফর্ম পূরণ করুন।",
+            "descEn": "Fill out the form on the ePassport portal."
+          },
+          {
+            "titleBn": "ফি প্রদান",
+            "titleEn": "Pay Fee",
+            "descBn": "অনলাইনে বা ব্যাংকে ফি জমা দিন।",
+            "descEn": "Pay fee online or at a bank."
+          },
+          {
+            "titleBn": "বায়োমেট্রিক",
+            "titleEn": "Biometrics",
+            "descBn": "পাসপোর্ট অফিসে গিয়ে ছবি ও আঙুলের ছাপ দিন।",
+            "descEn": "Provide photo and fingerprints at the passport office."
+          },
+          {
+            "titleBn": "পাসপোর্ট গ্রহণ",
+            "titleEn": "Collect",
+            "descBn": "মেসেজ পেলে পাসপোর্ট সংগ্রহ করুন।",
+            "descEn": "Collect passport when you receive an SMS."
+          }
+        ],
+        "commonMistakesBn": [
+          "অ্যাপয়েন্টমেন্টের দিন মূল কাগজপত্র না নেওয়া",
+          "পেশার ভুল প্রমাণপত্র দেওয়া"
+        ],
+        "commonMistakesEn": [
+          "Not taking original documents on appointment day",
+          "Providing wrong proof of profession"
+        ],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://www.epassport.gov.bd/",
+        "officialContactBn": "আঞ্চলিক পাসপোর্ট অফিস",
+        "officialContactEn": "Regional Passport Office"
+      },
+      {
+        "slug": "epassport-renewal",
+        "nameBn": "ই-পাসপোর্ট নবায়ন",
+        "nameEn": "e-Passport Renewal",
+        "purposeBn": "মেয়াদোত্তীর্ণ পাসপোর্ট নতুন করে নবায়ন করা।",
+        "purposeEn": "Renew an expired passport.",
+        "feeBn": "৪,০২৫ - ১৩,৮০০ টাকা",
+        "feeEn": "4,025 - 13,800 BDT",
+        "processingTimeBn": "২ - ২১ দিন",
+        "processingTimeEn": "2 - 21 Days",
+        "submissionLocationBn": "আঞ্চলিক পাসপোর্ট অফিস",
+        "submissionLocationEn": "Regional Passport Office",
+        "online": true,
+        "eligibilityBn": [
+          "যাদের পাসপোর্টের মেয়াদ শেষ বা শেষ হতে চলেছে"
+        ],
+        "eligibilityEn": [
+          "Those whose passport is expired or about to expire"
+        ],
+        "documentsBn": [
+          "পুরোনো পাসপোর্টের মূল কপি ও ফটোকপি",
+          "জাতীয় পরিচয়পত্র বা অনলাইন জন্ম নিবন্ধন (মূল কপি)",
+          "অনলাইন আবেদনের প্রিন্ট কপি"
+        ],
+        "documentsEn": [
+          "Original and photocopy of old passport",
+          "NID or online Birth Registration (original)",
+          "Printed online application"
+        ],
+        "steps": [
+          {
+            "titleBn": "অনলাইন আবেদন",
+            "titleEn": "Online App",
+            "descBn": "ePassport পোর্টালে রি-ইস্যু ফর্ম পূরণ করুন।",
+            "descEn": "Fill out the re-issue form on the ePassport portal."
+          },
+          {
+            "titleBn": "অফিসে জমা",
+            "titleEn": "Submit",
+            "descBn": "নির্ধারিত দিনে পুরোনো পাসপোর্টসহ অফিসে যান।",
+            "descEn": "Go to the office with the old passport on the scheduled day."
+          }
+        ],
+        "commonMistakesBn": [],
+        "commonMistakesEn": [],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://www.epassport.gov.bd/",
+        "officialContactBn": "আঞ্চলিক পাসপোর্ট অফিস",
+        "officialContactEn": "Regional Passport Office"
+      }
+    ]
+  },
+  {
+    "slug": "land-property",
+    "iconClass": "fa-solid fa-map-location-dot",
+    "iconEmoji": "🏗️",
+    "nameBn": "জমি ও সম্পত্তি",
+    "nameEn": "Land & Property",
+    "services": [
+      {
+        "slug": "land-mutation",
+        "nameBn": "নামজারি বা মিউটেশন",
+        "nameEn": "Land Mutation (Namjari)",
+        "purposeBn": "সরকারি রেকর্ড সংশোধন করে জমির বর্তমান মালিকের নাম অন্তর্ভুক্ত করা।",
+        "purposeEn": "Amend official records to include the current owner of the land.",
+        "feeBn": "১,১৭০ টাকা",
+        "feeEn": "1,170 BDT",
+        "processingTimeBn": "২৮ দিন",
+        "processingTimeEn": "28 Days",
+        "submissionLocationBn": "উপজেলা ভূমি অফিস (অনলাইন)",
+        "submissionLocationEn": "Upazila Land Office (Online)",
+        "online": true,
+        "eligibilityBn": [
+          "জমি ক্রয়কারী বা উত্তরাধিকারী"
+        ],
+        "eligibilityEn": [
+          "Land buyer or heir"
+        ],
+        "documentsBn": [
+          "জমির মূল দলিলের স্ক্যান কপি",
+          "সর্বশেষ জরিপের খতিয়ান বা পর্চা",
+          "ভূমি উন্নয়ন কর (খাজনা) পরিশোধের দাখিলা"
+        ],
+        "documentsEn": [
+          "Scanned copy of original land deed",
+          "Latest Khatian or Porcha",
+          "Land development tax (Khajna) payment receipt"
+        ],
+        "steps": [
+          {
+            "titleBn": "আবেদন ও ফি",
+            "titleEn": "Apply & Pay",
+            "descBn": "অনলাইনে আবেদন করুন এবং ৭০ টাকা ফি দিন।",
+            "descEn": "Apply online and pay 70 BDT fee."
+          },
+          {
+            "titleBn": "শুনানি",
+            "titleEn": "Hearing",
+            "descBn": "ভূমি অফিসে শুনানিতে অংশগ্রহণ করুন।",
+            "descEn": "Attend hearing at the land office."
+          },
+          {
+            "titleBn": "ডিসিআর ফি",
+            "titleEn": "DCR Fee",
+            "descBn": "অনুমোদনের পর ১,১০০ টাকা ডিসিআর ফি দিন।",
+            "descEn": "Pay 1,100 BDT DCR fee after approval."
+          },
+          {
+            "titleBn": "খতিয়ান সংগ্রহ",
+            "titleEn": "Get Khatian",
+            "descBn": "নতুন নামজারি খতিয়ান অনলাইন থেকে সংগ্রহ করুন।",
+            "descEn": "Collect the new Namjari Khatian online."
+          }
+        ],
+        "commonMistakesBn": [
+          "অফিসে গিয়ে নগদ টাকা লেনদেন করা"
+        ],
+        "commonMistakesEn": [
+          "Paying cash at the office instead of online"
+        ],
+        "warningsBn": [
+          "সরাসরি ভূমি অফিসে গিয়ে কোনো নগদ লেনদেন করবেন না। যেকোনো ধরনের অতিরিক্ত ফি দাবি করলে ১৬১২২ নম্বরে কল করুন।"
+        ],
+        "warningsEn": [
+          "Do not pay cash directly at the land office. If extra fees are demanded, call 16122."
+        ],
+        "officialWebsiteUrl": "https://mutation.land.gov.bd/",
+        "officialContactBn": "হেল্পলাইন: ১৬১২২",
+        "officialContactEn": "Helpline: 16122"
+      },
+      {
+        "slug": "land-porcha",
+        "nameBn": "খতিয়ান / পর্চা সংগ্রহ",
+        "nameEn": "Land Records (Porcha)",
+        "purposeBn": "জমির মালিকানার সরকারি রেকর্ড বা পর্চার কপি সংগ্রহ করা।",
+        "purposeEn": "Collect a copy of the official land ownership record or Porcha.",
+        "feeBn": "১২০ টাকা",
+        "feeEn": "120 BDT",
+        "processingTimeBn": "তাৎক্ষণিক (অনলাইন কপি)",
+        "processingTimeEn": "Instant (Online Copy)",
+        "submissionLocationBn": "ই-পর্চা ওয়েবসাইট",
+        "submissionLocationEn": "e-Porcha Website",
+        "online": true,
+        "eligibilityBn": [
+          "যেকোনো নাগরিক"
+        ],
+        "eligibilityEn": [
+          "Any citizen"
+        ],
+        "documentsBn": [
+          "খতিয়ান নম্বর বা দাগ নম্বর জানা থাকতে হবে"
+        ],
+        "documentsEn": [
+          "Must know Khatian number or Dag number"
+        ],
+        "steps": [
+          {
+            "titleBn": "অনুসন্ধান",
+            "titleEn": "Search",
+            "descBn": "ই-পর্চা পোর্টালে গিয়ে জেলা, উপজেলা ও মৌজা নির্বাচন করুন।",
+            "descEn": "Select district, upazila, and mouza on the e-Porcha portal."
+          },
+          {
+            "titleBn": "ফি প্রদান",
+            "titleEn": "Pay Fee",
+            "descBn": "অনলাইন পেমেন্ট গেটওয়ের মাধ্যমে ১২০ টাকা ফি দিন।",
+            "descEn": "Pay 120 BDT via the online payment gateway."
+          },
+          {
+            "titleBn": "ডাউনলোড",
+            "titleEn": "Download",
+            "descBn": "সার্টিফাইড কপি বা অনলাইন কপি ডাউনলোড করুন।",
+            "descEn": "Download the certified or online copy."
+          }
+        ],
+        "commonMistakesBn": [],
+        "commonMistakesEn": [],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://eporcha.gov.bd/",
+        "officialContactBn": "হেল্পলাইন: ১৬১২২",
+        "officialContactEn": "Helpline: 16122"
+      }
+    ]
+  },
+  {
+    "slug": "business-commerce",
+    "iconClass": "fa-solid fa-shop",
+    "iconEmoji": "🏪",
+    "nameBn": "ব্যবসা ও বাণিজ্য",
+    "nameEn": "Business & Commerce",
+    "services": [
+      {
+        "slug": "new-trade-license",
+        "nameBn": "নতুন ট্রেড লাইসেন্স",
+        "nameEn": "New Trade License",
+        "purposeBn": "বৈধভাবে ব্যবসা পরিচালনার জন্য স্থানীয় সরকারের অনুমোদনপত্র।",
+        "purposeEn": "Local government approval to conduct business legally.",
+        "feeBn": "১,০০০ - ৪০,০০০ টাকা (ব্যবসার ধরন অনুযায়ী)",
+        "feeEn": "1,000 - 40,000 BDT (Based on business type)",
+        "processingTimeBn": "৭ দিন",
+        "processingTimeEn": "7 Days",
+        "submissionLocationBn": "ইউনিয়ন পরিষদ / পৌরসভা",
+        "submissionLocationEn": "Union Parishad / Municipality",
+        "online": true,
+        "eligibilityBn": [
+          "যেকোনো ব্যবসায়ী বা উদ্যোক্তা"
+        ],
+        "eligibilityEn": [
+          "Any businessman or entrepreneur"
+        ],
+        "documentsBn": [
+          "মালিকের জাতীয় পরিচয়পত্র (NID) ও ছবি",
+          "দোকান ভাড়ার চুক্তিপত্র বা জমির দলিলের কপি",
+          "হোল্ডিং ট্যাক্স পরিশোধের রশিদ"
+        ],
+        "documentsEn": [
+          "Owner's NID and photo",
+          "Shop rent agreement or copy of land deed",
+          "Holding tax payment receipt"
+        ],
+        "steps": [
+          {
+            "titleBn": "আবেদন",
+            "titleEn": "Apply",
+            "descBn": "অনলাইনে বা অফিসে গিয়ে ফরম পূরণ করুন।",
+            "descEn": "Fill out the form online or at the office."
+          },
+          {
+            "titleBn": "পরিদর্শন",
+            "titleEn": "Inspection",
+            "descBn": "লাইসেন্স পরিদর্শক ব্যবসা প্রতিষ্ঠান পরিদর্শন করবেন।",
+            "descEn": "A license inspector will visit the business."
+          },
+          {
+            "titleBn": "লাইসেন্স গ্রহণ",
+            "titleEn": "Receive License",
+            "descBn": "ফি পরিশোধ করে লাইসেন্স গ্রহণ করুন।",
+            "descEn": "Pay the fee and collect the license."
+          }
+        ],
+        "commonMistakesBn": [],
+        "commonMistakesEn": [],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://uniontax.gov.bd/",
+        "officialContactBn": "স্থানীয় ইউপি/পৌরসভা অফিস",
+        "officialContactEn": "Local UP/Municipality Office"
+      },
+      {
+        "slug": "renew-trade-license",
+        "nameBn": "ট্রেড লাইসেন্স নবায়ন",
+        "nameEn": "Trade License Renewal",
+        "purposeBn": "মেয়াদোত্তীর্ণ ট্রেড লাইসেন্স এক বছরের জন্য নবায়ন করা।",
+        "purposeEn": "Renew an expired trade license for one year.",
+        "feeBn": "মূল ফির সমপরিমাণ",
+        "feeEn": "Equivalent to original fee",
+        "processingTimeBn": "৩ - ৭ দিন",
+        "processingTimeEn": "3 - 7 Days",
+        "submissionLocationBn": "ইউনিয়ন পরিষদ / পৌরসভা",
+        "submissionLocationEn": "Union Parishad / Municipality",
+        "online": true,
+        "eligibilityBn": [
+          "বিদ্যমান ট্রেড লাইসেন্সধারী"
+        ],
+        "eligibilityEn": [
+          "Existing trade license holder"
+        ],
+        "documentsBn": [
+          "পুরোনো ট্রেড লাইসেন্সের কপি",
+          "আয়কর রিটার্নের প্রমাণ (প্রযোজ্য ক্ষেত্রে)"
+        ],
+        "documentsEn": [
+          "Copy of old trade license",
+          "Proof of income tax return (if applicable)"
+        ],
+        "steps": [
+          {
+            "titleBn": "ফি প্রদান",
+            "titleEn": "Pay Fee",
+            "descBn": "নবায়ন ফি ও সারচার্জ পরিশোধ করুন।",
+            "descEn": "Pay renewal fee and surcharges."
+          }
+        ],
+        "commonMistakesBn": [],
+        "commonMistakesEn": [],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://uniontax.gov.bd/",
+        "officialContactBn": "স্থানীয় ইউপি/পৌরসভা অফিস",
+        "officialContactEn": "Local UP/Municipality Office"
+      }
+    ]
+  },
+  {
+    "slug": "vehicles-license",
+    "iconClass": "fa-solid fa-car",
+    "iconEmoji": "🚗",
+    "nameBn": "যানবাহন ও লাইসেন্স",
+    "nameEn": "Vehicles & License",
+    "services": [
+      {
+        "slug": "driving-license",
+        "nameBn": "নতুন ড্রাইভিং লাইসেন্স",
+        "nameEn": "New Driving License",
+        "purposeBn": "মোটরসাইকেল বা অন্যান্য যান চালানোর আইনি অনুমতি লাভ।",
+        "purposeEn": "Obtain legal permission to drive a motorcycle or other vehicles.",
+        "feeBn": "৪,৬০০ টাকা (অপেশাদার)",
+        "feeEn": "4,600 BDT (Non-professional)",
+        "processingTimeBn": "৩ - ৪ মাস",
+        "processingTimeEn": "3 - 4 Months",
+        "submissionLocationBn": "বিআরটিএ সার্ভিস পোর্টাল (BSP)",
+        "submissionLocationEn": "BRTA Service Portal (BSP)",
+        "online": true,
+        "eligibilityBn": [
+          "১৮ বছর বা তার বেশি বয়সী নাগরিক"
+        ],
+        "eligibilityEn": [
+          "Citizen aged 18 or above"
+        ],
+        "documentsBn": [
+          "এনআইডি কার্ডের কপি",
+          "রেজিস্টার্ড ডাক্তারের মেডিকেল সার্টিফিকেট",
+          "পাসপোর্ট সাইজের ছবি"
+        ],
+        "documentsEn": [
+          "Copy of NID card",
+          "Medical certificate from registered doctor",
+          "Passport size photo"
+        ],
+        "steps": [
+          {
+            "titleBn": "লার্নার লাইসেন্স",
+            "titleEn": "Learner License",
+            "descBn": "বিএসপি পোর্টালে অ্যাকাউন্ট করে লার্নার লাইসেন্স নিন।",
+            "descEn": "Get a learner license by creating an account on the BSP portal."
+          },
+          {
+            "titleBn": "প্রশিক্ষণ ও পরীক্ষা",
+            "titleEn": "Training & Exam",
+            "descBn": "২ মাস পর বিআরটিএ অফিসে পরীক্ষা দিন।",
+            "descEn": "Take the exam at BRTA office after 2 months."
+          },
+          {
+            "titleBn": "স্মার্ট কার্ড আবেদন",
+            "titleEn": "Smart Card App",
+            "descBn": "উত্তীর্ণ হলে অনলাইনে স্মার্ট কার্ডের ফি জমা দিন।",
+            "descEn": "If passed, pay smart card fee online."
+          },
+          {
+            "titleBn": "বায়োমেট্রিক",
+            "titleEn": "Biometrics",
+            "descBn": "অফিসে গিয়ে বায়োমেট্রিক দিন।",
+            "descEn": "Visit office to provide biometrics."
+          }
+        ],
+        "commonMistakesBn": [
+          "দালাল ধরা"
+        ],
+        "commonMistakesEn": [
+          "Hiring middlemen"
+        ],
+        "warningsBn": [
+          "দালাল থেকে সাবধানে থাকুন। সম্পূর্ণ কাজ অনলাইনে করা যায়।"
+        ],
+        "warningsEn": [
+          "Beware of middlemen. The entire process can be done online."
+        ],
+        "officialWebsiteUrl": "https://bsp.brta.gov.bd/",
+        "officialContactBn": "বিআরটিএ সার্কেল অফিস",
+        "officialContactEn": "BRTA Circle Office"
+      }
+    ]
+  },
+  {
+    "slug": "agricultural-services",
+    "iconClass": "fa-solid fa-wheat-awn",
+    "iconEmoji": "🌾",
+    "nameBn": "কৃষি সেবা",
+    "nameEn": "Agricultural Services",
+    "services": [
+      {
+        "slug": "krishok-card",
+        "nameBn": "কৃষক কার্ড",
+        "nameEn": "Krishok Card",
+        "purposeBn": "কৃষকদের সরকারি ভর্তুকি, সার, বীজ ও কৃষি ঋণ পাওয়ার ডিজিটাল কার্ড।",
+        "purposeEn": "Digital card for farmers to access government subsidies, fertilizer, seeds, and agricultural loans.",
+        "feeBn": "বিনামূল্যে",
+        "feeEn": "Free",
+        "processingTimeBn": "জানা নেই",
+        "processingTimeEn": "Unknown",
+        "submissionLocationBn": "উপজেলা কৃষি অফিস",
+        "submissionLocationEn": "Upazila Agriculture Office",
+        "online": false,
+        "eligibilityBn": [
+          "প্রকৃত কৃষক (ভূমিহীন থেকে বড় কৃষক)"
+        ],
+        "eligibilityEn": [
+          "Genuine farmer (landless to large farmer)"
+        ],
+        "documentsBn": [
+          "জাতীয় পরিচয়পত্র (NID)",
+          "পাসপোর্ট সাইজের ছবি",
+          "স্থানীয় মেম্বার বা চেয়ারম্যানের প্রত্যয়নপত্র"
+        ],
+        "documentsEn": [
+          "National ID (NID)",
+          "Passport size photo",
+          "Certificate from local Member or Chairman"
+        ],
+        "steps": [
+          {
+            "titleBn": "কৃষি অফিসে যান",
+            "titleEn": "Visit Agriculture Office",
+            "descBn": "উপজেলা কৃষি অফিসে যোগাযোগ করুন।",
+            "descEn": "Contact Upazila Agriculture Office."
+          },
+          {
+            "titleBn": "তথ্য দিন",
+            "titleEn": "Provide Info",
+            "descBn": "আপনার জমি ও ফসলের তথ্য দিন।",
+            "descEn": "Provide land and crop info."
+          },
+          {
+            "titleBn": "কার্ড সংগ্রহ",
+            "titleEn": "Collect Card",
+            "descBn": "ডিজিটাল কিউআর কোড যুক্ত কৃষক কার্ড সংগ্রহ করুন।",
+            "descEn": "Collect Krishi card with digital QR code."
+          }
+        ],
+        "commonMistakesBn": [],
+        "commonMistakesEn": [],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://mygov.bd/",
+        "officialContactBn": "উপজেলা কৃষি অফিস",
+        "officialContactEn": "Upazila Agriculture Office"
+      }
+    ]
+  },
+  {
+    "slug": "education-services",
+    "iconClass": "fa-solid fa-graduation-cap",
+    "iconEmoji": "🎓",
+    "nameBn": "শিক্ষা সেবা",
+    "nameEn": "Education Services",
+    "services": [
+      {
+        "slug": "equivalence-certificate",
+        "nameBn": "সমতা সনদ (Equivalence)",
+        "nameEn": "Equivalence Certificate",
+        "purposeBn": "বিদেশি বা অন্য বোর্ডের শিক্ষাগত যোগ্যতাকে বাংলাদেশের এসএসসি/এইচএসসির সমমান হিসেবে স্বীকৃতি প্রদান।",
+        "purposeEn": "Recognize foreign or other board educational qualifications as equivalent to Bangladesh SSC/HSC.",
+        "feeBn": "২,০০০ - ৪,০০০ টাকা",
+        "feeEn": "2,000 - 4,000 BDT",
+        "processingTimeBn": "১৫ - ৩০ দিন",
+        "processingTimeEn": "15 - 30 Days",
+        "submissionLocationBn": "শিক্ষা বোর্ডের ওয়েবসাইট",
+        "submissionLocationEn": "Education Board Website",
+        "online": true,
+        "eligibilityBn": [
+          "বিদেশি বোর্ড বা ও-লেভেল/এ-লেভেল পাস করা শিক্ষার্থী"
+        ],
+        "eligibilityEn": [
+          "Student passed from foreign board or O-Level/A-Level"
+        ],
+        "documentsBn": [
+          "মার্কশিট ও সনদের মূল কপি এবং সত্যায়িত কপি (দূতাবাস বা ব্রিটিশ কাউন্সিল কর্তৃক)",
+          "পাসপোর্ট ও জন্ম নিবন্ধন",
+          "পাসপোর্ট সাইজের ছবি"
+        ],
+        "documentsEn": [
+          "Original and attested copies of marksheets and certificates",
+          "Passport and Birth Registration",
+          "Passport size photo"
+        ],
+        "steps": [
+          {
+            "titleBn": "ফরম সংগ্রহ",
+            "titleEn": "Get Form",
+            "descBn": "শিক্ষা বোর্ডের ওয়েবসাইট থেকে ফরম ডাউনলোড করুন।",
+            "descEn": "Download form from Education Board website."
+          },
+          {
+            "titleBn": "ফি প্রদান",
+            "titleEn": "Pay Fee",
+            "descBn": "সোনালী সেবার মাধ্যমে ফি দিন।",
+            "descEn": "Pay fee via Sonali Seba."
+          },
+          {
+            "titleBn": "অফিসে জমা",
+            "titleEn": "Submit at Office",
+            "descBn": "সকল কাগজ শিক্ষা বোর্ডে জমা দিন।",
+            "descEn": "Submit all papers to the Education Board."
+          }
+        ],
+        "commonMistakesBn": [
+          "সঠিক কর্তৃপক্ষের সত্যায়ন না থাকা"
+        ],
+        "commonMistakesEn": [
+          "Lacking attestation from proper authority"
+        ],
+        "warningsBn": [],
+        "warningsEn": [],
+        "officialWebsiteUrl": "https://dhakaeducationboard.gov.bd/",
+        "officialContactBn": "সংশ্লিষ্ট শিক্ষা বোর্ড",
+        "officialContactEn": "Concerned Education Board"
+      }
+    ]
+  }
+]
