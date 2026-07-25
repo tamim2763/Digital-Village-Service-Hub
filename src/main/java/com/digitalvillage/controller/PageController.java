@@ -49,6 +49,7 @@ public class PageController {
 						.iconClass("fa-solid fa-file-lines")
 						.titleKey("service.forms.title")
 						.descriptionKey("service.forms.description")
+						.link("/services/forms")
 						.build(),
 				ServiceCard.builder()
 						.iconClass("fa-solid fa-cloud-sun-rain")
