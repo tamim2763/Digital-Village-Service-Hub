@@ -67,6 +67,7 @@ public class PageController {
 						.iconClass("fa-solid fa-stethoscope")
 						.titleKey("service.telemedicine.title")
 						.descriptionKey("service.telemedicine.description")
+						.link("/services/telemedicine")
 						.build());
 	}
 }

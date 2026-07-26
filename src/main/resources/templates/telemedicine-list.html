@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head th:replace="~{fragments/head :: head('telemedicine.list.title')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('services')}"></div>
+<main>
+    <section class="page-section">
+        <div class="container">
+            <div class="section-heading">
+                <span class="section-kicker" th:text="#{telemedicine.list.kicker}">Telemedicine</span>
+                <h1 th:text="#{telemedicine.list.heading}">Telemedicine Doctors</h1>
+                <p class="section-copy" th:text="#{service.telemedicine.description}">Consult a doctor from home through online healthcare services.</p>
+            </div>
+
+            <form class="surface-card p-4 mb-4" method="get" th:action="@{/services/telemedicine}">
+                <div class="row g-3 align-items-end">
+                    <div class="col-lg-4">
+                        <label class="form-label fw-semibold" th:text="#{telemedicine.list.filter_label}">Specialization</label>
+                        <select class="form-select form-select-lg" name="specialization">
+                            <option value="" th:selected="${specialization == null or specialization.isEmpty()}" th:text="#{telemedicine.list.all_specializations}">All Specializations</option>
+                            <option value="General Physician" th:selected="${specialization == 'General Physician'}" th:text="#{telemedicine.specialization.general_physician}">General Physician</option>
+                            <option value="Gynecologist" th:selected="${specialization == 'Gynecologist'}" th:text="#{telemedicine.specialization.gynecologist}">Gynecologist</option>
+                            <option value="Pediatrician" th:selected="${specialization == 'Pediatrician'}" th:text="#{telemedicine.specialization.pediatrician}">Pediatrician</option>
+                            <option value="Dermatologist" th:selected="${specialization == 'Dermatologist'}" th:text="#{telemedicine.specialization.dermatologist}">Dermatologist</option>
+                            <option value="Orthopedic" th:selected="${specialization == 'Orthopedic'}" th:text="#{telemedicine.specialization.orthopedic}">Orthopedic</option>
+                            <option value="Internal Medicine" th:selected="${specialization == 'Internal Medicine'}" th:text="#{telemedicine.specialization.internal_medicine}">Internal Medicine</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-5">
+                        <label class="form-label fw-semibold" th:text="#{telemedicine.list.search_label}">Search</label>
+                        <input class="form-control form-control-lg" name="q" type="search" th:value="${query}" th:placeholder="#{telemedicine.list.search_placeholder}">
+                    </div>
+                    <div class="col-lg-3 text-lg-end">
+                        <button type="submit" class="btn btn-primary-dv w-100 w-lg-auto" th:text="#{telemedicine.list.search_button}">Search Doctors</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row g-4" th:if="${!#lists.isEmpty(doctors)}">
+                <div class="col-md-6 col-xl-4" th:each="doctor : ${doctors}">
+                    <div class="service-card d-flex flex-column">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div th:if="${doctor.photoUrl != null and !#strings.isEmpty(doctor.photoUrl)}">
+                                <img th:src="${doctor.photoUrl}" alt="Doctor photo" class="rounded-circle border" style="width: 4.25rem; height: 4.25rem; object-fit: cover;">
+                            </div>
+                            <div th:if="${doctor.photoUrl == null or #strings.isEmpty(doctor.photoUrl)}" class="service-icon rounded-circle mb-0" style="width: 4.25rem; height: 4.25rem; border-radius: 999px;">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <div>
+                                <h3 class="mb-1" th:text="${#locale.language == 'bn' ? doctor.nameBn : doctor.nameEn}">Doctor Name</h3>
+                                <p class="mb-1" th:text="${#locale.language == 'bn' ? doctor.specializationBn : doctor.specializationEn}">Specialization</p>
+                                <span class="badge rounded-pill"
+                                      th:classappend="${doctor.availableStatus.name() == 'ONLINE' ? ' bg-success' : (doctor.availableStatus.name() == 'BUSY' ? ' bg-warning text-dark' : ' bg-secondary')}"
+                                      th:text="#{telemedicine.status.__${#strings.toLowerCase(doctor.availableStatus.name())}__}">Online</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge text-bg-light border" th:text="#{telemedicine.label.experience} + ' : ' + ${doctor.experienceYears} + ' ' + #{telemedicine.label.years}">Experience</span>
+                            <span class="badge text-bg-light border" th:text="#{telemedicine.label.rating} + ' : ' + ${#numbers.formatDecimal(doctor.rating, 1, 1)}">Rating</span>
+                            <span class="badge text-bg-light border" th:text="#{telemedicine.label.consultation_fee} + ' : ' + ${doctor.consultationFee} + ' ৳'">Fee</span>
+                        </div>
+
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <small class="text-muted" th:text="#{telemedicine.label.availability}">Availability</small>
+                            <a class="btn btn-primary-dv" th:href="@{/services/telemedicine/{id}(id=${doctor.id})}" th:text="#{telemedicine.list.details_button}">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-light border mt-4" th:if="${#lists.isEmpty(doctors)}" th:text="#{telemedicine.list.empty}">No doctors found.</div>
+        </div>
+    </section>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

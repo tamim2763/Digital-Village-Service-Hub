@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head th:replace="~{fragments/head :: head('telemedicine.booking.title')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar('services')}"></div>
+<main>
+    <section class="page-section">
+        <div class="container">
+            <div class="section-heading">
+                <span class="section-kicker" th:text="#{telemedicine.booking.kicker}">Booking</span>
+                <h1 th:text="#{telemedicine.booking.heading}">Book Your Telemedicine Appointment</h1>
+                <p class="section-copy" th:text="#{service.telemedicine.description}">Consult a doctor from home through online healthcare services.</p>
+            </div>
+
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-8">
+                    <form class="service-card" th:action="@{/services/telemedicine/{id}/confirm(id=${doctor.id})}" th:object="${bookingForm}" method="post">
+                        <input type="hidden" th:field="*{doctorId}">
+                        <input type="hidden" th:field="*{consultationType}">
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" th:text="#{telemedicine.booking.patient_name}">Patient Name</label>
+                                <input type="text" class="form-control form-control-lg" th:field="*{patientName}" th:placeholder="#{telemedicine.booking.patient_name}">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}">Error</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold" th:text="#{telemedicine.booking.patient_age}">Age</label>
+                                <input type="number" min="1" max="120" class="form-control form-control-lg" th:field="*{patientAge}" th:placeholder="#{telemedicine.booking.patient_age}">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('patientAge')}" th:errors="*{patientAge}">Error</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold" th:text="#{telemedicine.booking.patient_gender}">Gender</label>
+                                <select class="form-select form-select-lg" th:field="*{patientGender}">
+                                    <option value="" th:text="#{telemedicine.booking.select_gender}">Select gender</option>
+                                    <option value="MALE" th:text="#{telemedicine.booking.gender_male}">Male</option>
+                                    <option value="FEMALE" th:text="#{telemedicine.booking.gender_female}">Female</option>
+                                    <option value="OTHER" th:text="#{telemedicine.booking.gender_other}">Other</option>
+                                </select>
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('patientGender')}" th:errors="*{patientGender}">Error</div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold" th:text="#{telemedicine.booking.symptoms}">Symptoms</label>
+                                <textarea class="form-control form-control-lg" rows="5" th:field="*{symptoms}" th:placeholder="#{telemedicine.booking.symptoms}"></textarea>
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('symptoms')}" th:errors="*{symptoms}">Error</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" th:text="#{telemedicine.booking.preferred_date}">Preferred Date</label>
+                                <input type="date" class="form-control form-control-lg" th:field="*{appointmentDate}">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('appointmentDate')}" th:errors="*{appointmentDate}">Error</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" th:text="#{telemedicine.booking.preferred_time}">Preferred Time</label>
+                                <input type="time" class="form-control form-control-lg" th:field="*{appointmentTime}">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('appointmentTime')}" th:errors="*{appointmentTime}">Error</div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4 gap-3 flex-wrap">
+                            <a class="btn btn-secondary-dv" th:href="@{/services/telemedicine}" th:text="#{telemedicine.booking.back}">Back</a>
+                            <button type="submit" class="btn btn-primary-dv" th:text="#{telemedicine.booking.confirm_button}">Confirm Booking</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="service-card">
+                        <h3 class="mb-3" th:text="#{telemedicine.booking.summary_heading}">Doctor Summary</h3>
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div th:if="${doctor.photoUrl != null and !#strings.isEmpty(doctor.photoUrl)}">
+                                <img th:src="${doctor.photoUrl}" alt="Doctor photo" class="rounded-circle border" style="width: 4rem; height: 4rem; object-fit: cover;">
+                            </div>
+                            <div th:if="${doctor.photoUrl == null or #strings.isEmpty(doctor.photoUrl)}" class="service-icon rounded-circle mb-0" style="width: 4rem; height: 4rem; border-radius: 999px;">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <div>
+                                <h3 class="mb-1" th:text="${#locale.language == 'bn' ? doctor.nameBn : doctor.nameEn}">Doctor Name</h3>
+                                <p class="mb-1" th:text="${#locale.language == 'bn' ? doctor.specializationBn : doctor.specializationEn}">Specialization</p>
+                                <small class="text-muted" th:text="#{telemedicine.booking.consultation_type}">Consultation Type</small>
+                                <div class="fw-semibold" th:text="#{telemedicine.consultation.__${#strings.toLowerCase(bookingForm.consultationType)}__}">Video Consultation</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-light rounded mb-3">
+                            <small class="text-muted d-block" th:text="#{telemedicine.label.qualification}">Qualification</small>
+                            <strong th:text="${doctor.qualification}">MBBS</strong>
+                        </div>
+                        <div class="p-3 bg-light rounded mb-3">
+                            <small class="text-muted d-block" th:text="#{telemedicine.label.consultation_fee}">Consultation Fee</small>
+                            <strong th:text="${doctor.consultationFee} + ' ৳'">450 ৳</strong>
+                        </div>
+                        <div class="p-3 bg-light rounded">
+                            <small class="text-muted d-block" th:text="#{telemedicine.label.availability}">Availability</small>
+                            <strong th:text="#{telemedicine.status.__${#strings.toLowerCase(doctor.availableStatus.name())}__}">Online</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
