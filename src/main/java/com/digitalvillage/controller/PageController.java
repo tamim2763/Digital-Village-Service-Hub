@@ -61,6 +61,7 @@ public class PageController {
 						.iconClass("fa-solid fa-wheat-awn-circle-exclamation")
 						.titleKey("service.crop.title")
 						.descriptionKey("service.crop.description")
+						.link("/services/fosol")
 						.build(),
 				ServiceCard.builder()
 						.iconClass("fa-solid fa-stethoscope")
